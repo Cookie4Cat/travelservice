@@ -1,7 +1,7 @@
-package edu.ynu.travel.controller;
+package edu.ynu.travel.controller.complaint;
 
-import edu.ynu.travel.entity.UserEntity;
-import edu.ynu.travel.service.IUserService;
+import edu.ynu.travel.entity.complaint.UserEntity;
+import edu.ynu.travel.service.complaint.IUserService;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

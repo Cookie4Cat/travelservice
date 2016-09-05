@@ -1,8 +1,8 @@
-package edu.ynu.travel.service.impl;
+package edu.ynu.travel.service.complaint.impl;
 
-import edu.ynu.travel.entity.UserEntity;
-import edu.ynu.travel.mapper.UserEntityMapper;
-import edu.ynu.travel.service.IUserService;
+import edu.ynu.travel.entity.complaint.UserEntity;
+import edu.ynu.travel.mapper.complaint.UserEntityMapper;
+import edu.ynu.travel.service.complaint.IUserService;
 import org.jvnet.hk2.annotations.Service;
 
 

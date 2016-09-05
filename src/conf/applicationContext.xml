@@ -11,7 +11,7 @@
              http://www.springframework.org/schema/context
              http://www.springframework.org/schema/context/spring-context-4.2.xsd">
     <!-- 配置自动扫描的包 -->
-    <context:component-scan base-package="edu.ynu.travel"
+    <context:component-scan base-package="edu.ynu.travel.*"
                             use-default-filters="false">
         <context:include-filter type="annotation"
                                 expression="org.springframework.stereotype.Controller" />
@@ -48,13 +48,13 @@
         <!-- 加载conf.xml文件 -->
         <property name="configLocation" value="classpath:conf/conf.xml"></property>
         <!-- 自动扫描需要定义类别名的包，将包内的JAVA类的类名作为类别名 -->
-        <property name="typeAliasesPackage" value="edu.ynu.travel.entity"></property>
-        <property name="mapperLocations" value="classpath*:edu/ynu/travel/mapping/*.xml"/>
+        <property name="typeAliasesPackage" value="edu.ynu.travel.entity.*"></property>
+        <property name="mapperLocations" value="classpath*:edu/ynu/travel/mapping/*/*.xml"/>
     </bean>
 
     <!--mybatis自动扫描加载sql映射文件:mapperScannerConfigurer-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="edu.ynu.travel.mapper"/><!--指定sql映射文件、接口所在的包-->
+        <property name="basePackage" value="edu.ynu.travel.mapper.*"/><!--指定sql映射文件、接口所在的包-->
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 
@@ -70,5 +70,6 @@
     <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>
 
 
-    <bean id="IUserService" class="edu.ynu.travel.service.impl.UserServiceImpl"></bean>
+    <bean id="InfoService" class="edu.ynu.travel.service.emergency.impl.InfoServiceImpl"></bean>
+    <bean id="IUserService" class="edu.ynu.travel.service.complaint.impl.UserServiceImpl"></bean>
 </beans>
