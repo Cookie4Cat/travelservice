@@ -1,4 +1,4 @@
-package edu.ynu.travel.Util;
+package edu.ynu.travel.util;
 
 import java.io.File;
 import java.io.IOException;

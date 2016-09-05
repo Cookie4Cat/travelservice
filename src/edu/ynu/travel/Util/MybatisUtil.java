@@ -1,4 +1,4 @@
-package edu.ynu.travel.Util;
+package edu.ynu.travel.util;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
