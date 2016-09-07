@@ -14,11 +14,16 @@ import javax.annotation.Resource;
 @Service
 public class UserServiceImpl implements IUserService {
 
-    @Resource(name = "userEntityMapper")
+    @Resource(name = "userMapper")
     private UserEntityMapper userEntityMapper;
 
     @Override
     public UserEntity getUser(Integer id) {
         return userEntityMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public int addUser(UserEntity record) {
+        return userEntityMapper.insertSelective(record);
     }
 }

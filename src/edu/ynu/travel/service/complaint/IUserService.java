@@ -9,4 +9,5 @@ import edu.ynu.travel.entity.complaint.UserEntity;
 
 public interface IUserService{
     UserEntity getUser(Integer id);
+    int addUser(UserEntity record);
 }

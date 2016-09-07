@@ -69,6 +69,7 @@
     <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor "/>
     <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>
 
+    <bean class="edu.ynu.travel.filter.CorsConfigurerAdapter"></bean>
 
     <bean id="InfoService" class="edu.ynu.travel.service.emergency.impl.InfoServiceImpl"></bean>
     <bean id="IUserService" class="edu.ynu.travel.service.complaint.impl.UserServiceImpl"></bean>
