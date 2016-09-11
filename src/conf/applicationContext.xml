@@ -71,6 +71,9 @@
 
     <bean class="edu.ynu.travel.filter.CorsConfigurerAdapter"></bean>
 
+    <bean id="ComplaintEntityExample" class="edu.ynu.travel.entity.complaint.ComplaintEntityExample"></bean>
+
     <bean id="InfoService" class="edu.ynu.travel.service.emergency.impl.InfoServiceImpl"></bean>
-    <bean id="IUserService" class="edu.ynu.travel.service.complaint.impl.UserServiceImpl"></bean>
+    <bean id="IUserService" class="edu.ynu.travel.service.user.impl.UserServiceImpl"></bean>
+    <bean id="IAdminService" class="edu.ynu.travel.service.complaint.impl.AdminServiceImpl"></bean>
 </beans>

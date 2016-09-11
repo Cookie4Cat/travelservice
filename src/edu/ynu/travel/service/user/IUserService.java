@@ -1,6 +1,6 @@
-package edu.ynu.travel.service.complaint;
+package edu.ynu.travel.service.user;
 
-import edu.ynu.travel.entity.complaint.UserEntity;
+import edu.ynu.travel.entity.user.UserEntity;
 
 /**
  * Created by Administrator on 2016/9/4.

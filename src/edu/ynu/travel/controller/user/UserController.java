@@ -1,7 +1,7 @@
-package edu.ynu.travel.controller.complaint;
+package edu.ynu.travel.controller.user;
 
-import edu.ynu.travel.entity.complaint.UserEntity;
-import edu.ynu.travel.service.complaint.IUserService;
+import edu.ynu.travel.entity.user.UserEntity;
+import edu.ynu.travel.service.user.IUserService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

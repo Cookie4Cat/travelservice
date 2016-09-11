@@ -1,13 +1,12 @@
 package edu.ynu.travel.test.complaint;
 
 
-import edu.ynu.travel.entity.complaint.UserEntity;
-import edu.ynu.travel.service.complaint.IUserService;
+import edu.ynu.travel.entity.user.UserEntity;
+import edu.ynu.travel.service.user.IUserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.security.core.userdetails.User;
 
 /**
  * Created by Administrator on 2016/9/4.
