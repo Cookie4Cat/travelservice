@@ -9,3 +9,4 @@ WebRoot/WEB-INF/lib
 jerseyDemo.iml
 src/conf/datasource.properties
 /src/conf/generator.xml
+/WebRoot/upload/

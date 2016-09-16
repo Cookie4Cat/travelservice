@@ -2,6 +2,7 @@ package edu.ynu.travel.mapper.complaint;
 
 import edu.ynu.travel.entity.complaint.ComplaintEntity;
 import edu.ynu.travel.entity.complaint.ComplaintEntityExample;
+import edu.ynu.travel.message.com.ComplaintMap;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,9 +16,13 @@ public interface ComplaintEntityMapper {
 
     int insert(ComplaintEntity record);
 
+    int insertSelective(ComplaintEntity record);
+
     List<ComplaintEntity> selectByExample(ComplaintEntityExample example);
 
-    ComplaintEntity selectByPrimaryKey(Integer id);
+    ComplaintMap selectByPrimaryKey(Integer id);
+
+    ComplaintMap selectByReplyId(Integer id);
 
     int updateByPrimaryKeySelective(ComplaintEntity record);
 
