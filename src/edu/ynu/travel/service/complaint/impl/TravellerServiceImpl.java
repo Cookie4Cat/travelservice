@@ -26,14 +26,6 @@ public class TravellerServiceImpl implements ITravellerService {
     private ComplaintEntityExample complaintExample;
 
     @Override
-    public ComplaintEntity addComplaint(ComplaintEntity record, List<ComImgEntity> comImgEntity) {
-//        complaintMapper.insertSelective(record);
-//        comImgEntity.setComId(record.getId());
-//        comImgMapper.insertSelective(comImgEntity);
-        return null;
-    }
-
-    @Override
     public int grade(ComplaintEntity record) {
         return complaintMapper.updateByPrimaryKeySelective(record);
     }
@@ -49,7 +41,7 @@ public class TravellerServiceImpl implements ITravellerService {
     @Override
     public List<ComplaintMap> getComplaintDetail(int id) {
         ComplaintMap complaintMap = complaintMapper.selectByPrimaryKey(id);
-        List<ComplaintMap> complaints = new ArrayList();
+        List<ComplaintMap> complaints = new ArrayList<>();
         complaints.add(complaintMap);
         ComplaintMap reply = complaintMapper.selectByReplyId(id);
         while (null != reply){
@@ -84,5 +76,21 @@ public class TravellerServiceImpl implements ITravellerService {
         }else{
             return 0;
         }
+    }
+
+    @Override
+    public ComplaintEntity createComplaint(ComplaintEntity complaintEntity) {
+        if(complaintMapper.insert(complaintEntity) == 1){
+            return complaintEntity;
+        }else{
+            return null;
+        }
+
+    }
+
+    @Override
+    public ComplaintEntity replyComplaint(int cid, ComplaintEntity complaintEntity) {
+        complaintEntity.setReplyComId(cid);
+        return createComplaint(complaintEntity);
     }
 }

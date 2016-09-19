@@ -67,6 +67,21 @@ public class TravelController {
     }
 
     /***
+     * 游客创建投诉
+     * @param complaintEntity 投诉信息
+     * @return 投诉信息
+     */
+    @RequestMapping(value = "/complaints",method = RequestMethod.POST)
+    public ComplaintEntity createComplaint(@RequestBody ComplaintEntity complaintEntity){
+        return travellerService.createComplaint(complaintEntity);
+    }
+
+    @RequestMapping(value = "/complaints/{cid}/reply",method = RequestMethod.POST)
+    public ComplaintEntity replyComplaint(@PathVariable int cid,@RequestBody ComplaintEntity complaintEntity){
+        return null;
+    }
+
+    /***
      * 游客对某次投诉进行评价
      * @param cid 投诉信息ID
      * @param complaintEntity 评价星级信息 JSON => {"star": INT}
