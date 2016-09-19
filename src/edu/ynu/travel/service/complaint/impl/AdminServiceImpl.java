@@ -9,9 +9,6 @@ import org.jvnet.hk2.annotations.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
-/**
- * Created by Administrator on 2016/9/11.
- */
 @Service
 public class AdminServiceImpl implements IAdminService {
     @Resource(name = "complaintMapper")

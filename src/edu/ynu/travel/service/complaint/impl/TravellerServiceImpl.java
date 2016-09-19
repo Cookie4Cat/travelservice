@@ -9,14 +9,13 @@ import edu.ynu.travel.message.com.ComplaintMap;
 import edu.ynu.travel.message.common.SimpleResponse;
 import edu.ynu.travel.service.complaint.ITravellerService;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Administrator on 2016/9/12.
- */
 @Service
 public class TravellerServiceImpl implements ITravellerService {
     @Resource(name = "complaintMapper")
@@ -35,9 +34,8 @@ public class TravellerServiceImpl implements ITravellerService {
     }
 
     @Override
-    public SimpleResponse grade(ComplaintEntity record) {
-        complaintMapper.updateByPrimaryKeySelective(record);
-        return new SimpleResponse("评分成功","success");
+    public int grade(ComplaintEntity record) {
+        return complaintMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
@@ -60,5 +58,31 @@ public class TravellerServiceImpl implements ITravellerService {
             reply = complaintMapper.selectByReplyId(id);
         }
         return complaints;
+    }
+
+    @Override
+    public int uploadComImg(MultipartFile file, int cid, String path) {
+        if(null!=file){
+            ComImgEntity comImgEntity = new ComImgEntity();
+            String fileName = file.getOriginalFilename();
+            File targetFile = new File(path, fileName);
+            if(!targetFile.exists()){
+                targetFile.mkdirs();
+            }
+            //存入图片
+            try {
+                file.transferTo(targetFile);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            //获取上传图片的url
+            String url = "/upload/"+fileName;
+            comImgEntity.setImageUrl(url);
+            comImgEntity.setComId(cid);
+            return comImgMapper.insert(comImgEntity);
+        }else{
+            return 0;
+        }
     }
 }
