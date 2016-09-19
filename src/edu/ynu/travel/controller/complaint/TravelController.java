@@ -69,7 +69,7 @@ public class TravelController {
     /***
      * 游客创建投诉
      * @param complaintEntity 投诉信息
-     * @return 投诉信息
+     * @return 所创建的投诉信息
      */
     @RequestMapping(value = "/complaints",method = RequestMethod.POST)
     public ComplaintEntity createComplaint(@RequestBody ComplaintEntity complaintEntity){
@@ -78,9 +78,9 @@ public class TravelController {
 
     /***
      * 用户回复投诉
-     * @param cid
-     * @param complaintEntity
-     * @return
+     * @param cid 所回复投诉ID
+     * @param complaintEntity 回复内容
+     * @return 所创建的回复信息
      */
     @RequestMapping(value = "/complaints/{cid}/reply",method = RequestMethod.POST)
     public ComplaintEntity replyComplaint(@PathVariable int cid,@RequestBody ComplaintEntity complaintEntity){
