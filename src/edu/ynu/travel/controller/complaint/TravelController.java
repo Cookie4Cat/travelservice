@@ -76,9 +76,15 @@ public class TravelController {
         return travellerService.createComplaint(complaintEntity);
     }
 
+    /***
+     * 用户回复投诉
+     * @param cid
+     * @param complaintEntity
+     * @return
+     */
     @RequestMapping(value = "/complaints/{cid}/reply",method = RequestMethod.POST)
     public ComplaintEntity replyComplaint(@PathVariable int cid,@RequestBody ComplaintEntity complaintEntity){
-        return null;
+        return travellerService.replyComplaint(cid, complaintEntity);
     }
 
     /***
