@@ -15,6 +15,7 @@ import javax.annotation.Resource;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class TravellerServiceImpl implements ITravellerService {
@@ -24,6 +25,8 @@ public class TravellerServiceImpl implements ITravellerService {
     private ComImgEntityMapper comImgMapper;
     @Resource
     private ComplaintEntityExample complaintExample;
+
+    private static final String STATUS_INIT= "待审核";
 
     @Override
     public int grade(ComplaintEntity record) {
@@ -56,7 +59,7 @@ public class TravellerServiceImpl implements ITravellerService {
     public int uploadComImg(MultipartFile file, int cid, String path) {
         if(null!=file){
             ComImgEntity comImgEntity = new ComImgEntity();
-            String fileName = file.getOriginalFilename();
+            String fileName = UUID.randomUUID().toString();
             File targetFile = new File(path, fileName);
             if(!targetFile.exists()){
                 targetFile.mkdirs();
@@ -80,6 +83,7 @@ public class TravellerServiceImpl implements ITravellerService {
 
     @Override
     public ComplaintEntity createComplaint(ComplaintEntity complaintEntity) {
+        complaintEntity.setStatus(STATUS_INIT);
         if(complaintMapper.insert(complaintEntity) == 1){
             return complaintEntity;
         }else{
@@ -91,6 +95,10 @@ public class TravellerServiceImpl implements ITravellerService {
     @Override
     public ComplaintEntity replyComplaint(int cid, ComplaintEntity complaintEntity) {
         complaintEntity.setReplyComId(cid);
-        return createComplaint(complaintEntity);
+        if(complaintMapper.insert(complaintEntity) == 1){
+            return complaintEntity;
+        }else{
+            return null;
+        }
     }
 }

@@ -133,7 +133,7 @@
       type, description, create_at, 
       status, star)
     values ( #{userId,jdbcType=INTEGER}, #{replyComId,jdbcType=INTEGER},
-      #{type,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP},
+      #{type,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, now(),
       #{status,jdbcType=VARCHAR}, #{star,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="edu.ynu.travel.entity.complaint.ComplaintEntity" >
