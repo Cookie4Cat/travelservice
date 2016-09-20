@@ -1,5 +1,6 @@
 package edu.ynu.travel.service.complaint;
 
+import edu.ynu.travel.entity.complaint.ComTypeEntity;
 import edu.ynu.travel.entity.complaint.ComplaintEntity;
 import edu.ynu.travel.message.com.ComplaintMap;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,4 +14,5 @@ public interface ITravellerService {
     int uploadComImg(MultipartFile file, int cid, String path);
     ComplaintEntity createComplaint(ComplaintEntity complaintEntity);
     ComplaintEntity replyComplaint(int cid, ComplaintEntity complaintEntity);
+    List<ComTypeEntity> getComTypes();
 }

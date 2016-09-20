@@ -1,9 +1,11 @@
 package edu.ynu.travel.service.complaint.impl;
 
 import edu.ynu.travel.entity.complaint.ComImgEntity;
+import edu.ynu.travel.entity.complaint.ComTypeEntity;
 import edu.ynu.travel.entity.complaint.ComplaintEntity;
 import edu.ynu.travel.entity.complaint.ComplaintEntityExample;
 import edu.ynu.travel.mapper.complaint.ComImgEntityMapper;
+import edu.ynu.travel.mapper.complaint.ComTypeEntityMapper;
 import edu.ynu.travel.mapper.complaint.ComplaintEntityMapper;
 import edu.ynu.travel.message.com.ComplaintMap;
 import edu.ynu.travel.message.common.SimpleResponse;
@@ -25,6 +27,8 @@ public class TravellerServiceImpl implements ITravellerService {
     private ComImgEntityMapper comImgMapper;
     @Resource
     private ComplaintEntityExample complaintExample;
+    @Resource(name = "com_type")
+    private ComTypeEntityMapper comTypeEntityMapper;
 
     private static final String STATUS_INIT= "待审核";
 
@@ -100,5 +104,10 @@ public class TravellerServiceImpl implements ITravellerService {
         }else{
             return null;
         }
+    }
+
+    @Override
+    public List<ComTypeEntity> getComTypes() {
+        return comTypeEntityMapper.selectAll();
     }
 }

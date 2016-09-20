@@ -1,5 +1,6 @@
 package edu.ynu.travel.controller.complaint;
 
+import edu.ynu.travel.entity.complaint.ComTypeEntity;
 import edu.ynu.travel.entity.complaint.ComplaintEntity;
 import edu.ynu.travel.message.com.ComplaintMap;
 import edu.ynu.travel.message.common.SimpleResponse;
@@ -101,5 +102,10 @@ public class TravelController {
         }else {
             return new SimpleResponse("评价失败","error");
         }
+    }
+
+    @RequestMapping(value = "/complaints/types", method = RequestMethod.GET)
+    public List<ComTypeEntity> getAllTypes(){
+        return travellerService.getComTypes();
     }
 }
