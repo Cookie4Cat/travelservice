@@ -36,12 +36,17 @@ public class TravelController {
     }
 
     /***
-     * 获取某次投诉
+     * 获取某次投诉对话信息
      * @param id 投诉信息ID
      * @return 投诉对话列表
      */
+    @RequestMapping(value = "/complaints/{id}/interaction",method = RequestMethod.GET)
+    public List<ComplaintMap> getComplaintInteraction(@PathVariable int id){
+        return travellerService.getComplaintInteraction(id);
+    }
+
     @RequestMapping(value = "/complaints/{id}",method = RequestMethod.GET)
-    public List<ComplaintMap> getComplaintDetail(@PathVariable int id){
+    public ComplaintEntity getComplaintDetail(@PathVariable int id){
         return travellerService.getComplaintDetail(id);
     }
 
@@ -104,6 +109,21 @@ public class TravelController {
         }
     }
 
+    /***
+     * 重新提交投诉信息
+     * @param complaintEntity 投诉信息
+     * @return 更新后的投诉信息
+     */
+    @RequestMapping(value = "complaints/{cid}", method = RequestMethod.POST)
+    public ComplaintEntity resubmitComplaint(@RequestBody ComplaintEntity complaintEntity){
+        travellerService.resubmitComplaint(complaintEntity);
+        return complaintEntity;
+    }
+
+    /***
+     * 获取投诉类型LOV
+     * @return 投诉类型列表
+     */
     @RequestMapping(value = "/complaints/types", method = RequestMethod.GET)
     public List<ComTypeEntity> getAllTypes(){
         return travellerService.getComTypes();

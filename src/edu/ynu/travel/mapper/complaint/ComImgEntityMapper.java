@@ -27,4 +27,6 @@ public interface ComImgEntityMapper {
 
 
     int updateByPrimaryKey(ComImgEntity record);
+
+    int deleteByComId(int comId);
 }

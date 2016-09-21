@@ -31,14 +31,17 @@ public class TravellerServiceImpl implements ITravellerService {
     private ComTypeEntityMapper comTypeEntityMapper;
 
     private static final String STATUS_INIT= "待审核";
+    private static final String STATUS_COMPLETE = "处理完成";
 
     @Override
     public int grade(ComplaintEntity record) {
+        record.setStatus(STATUS_COMPLETE);
         return complaintMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
     public List<ComplaintEntity> getComplaintsByTid(int TId) {
+        complaintExample.setOrderByClause("create_at desc");
         ComplaintEntityExample.Criteria criteria  =  complaintExample.createCriteria();
         criteria.andUserIdEqualTo(TId);
         criteria.andReplyComIdEqualTo(0);
@@ -46,7 +49,7 @@ public class TravellerServiceImpl implements ITravellerService {
     }
 
     @Override
-    public List<ComplaintMap> getComplaintDetail(int id) {
+    public List<ComplaintMap> getComplaintInteraction(int id) {
         ComplaintMap complaintMap = complaintMapper.selectByPrimaryKey(id);
         List<ComplaintMap> complaints = new ArrayList<>();
         complaints.add(complaintMap);
@@ -57,6 +60,11 @@ public class TravellerServiceImpl implements ITravellerService {
             reply = complaintMapper.selectByReplyId(id);
         }
         return complaints;
+    }
+
+    @Override
+    public ComplaintEntity getComplaintDetail(int id) {
+        return complaintMapper.selectByPrimaryKey(id);
     }
 
     @Override
@@ -109,5 +117,13 @@ public class TravellerServiceImpl implements ITravellerService {
     @Override
     public List<ComTypeEntity> getComTypes() {
         return comTypeEntityMapper.selectAll();
+    }
+
+    @Override
+    public int resubmitComplaint(ComplaintEntity complaintEntity) {
+        complaintEntity.setStatus(STATUS_INIT);
+        //删除所属图片
+        comImgMapper.deleteByComId(complaintEntity.getId());
+        return complaintMapper.updateByPrimaryKeySelective(complaintEntity);
     }
 }

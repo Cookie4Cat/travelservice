@@ -8,11 +8,13 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 public interface ITravellerService {
-    List<ComplaintMap> getComplaintDetail(int id);
+    List<ComplaintMap> getComplaintInteraction(int id);
+    ComplaintEntity getComplaintDetail(int id);
     List<ComplaintEntity> getComplaintsByTid(int TId);
     int grade(ComplaintEntity record);
     int uploadComImg(MultipartFile file, int cid, String path);
     ComplaintEntity createComplaint(ComplaintEntity complaintEntity);
     ComplaintEntity replyComplaint(int cid, ComplaintEntity complaintEntity);
     List<ComTypeEntity> getComTypes();
+    int resubmitComplaint(ComplaintEntity complaintEntity);
 }

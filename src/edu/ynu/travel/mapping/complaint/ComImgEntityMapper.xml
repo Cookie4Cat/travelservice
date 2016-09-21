@@ -47,6 +47,12 @@
     delete from com_image
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
+  <delete id="deleteByComId" parameterType="java.lang.Integer" >
+    delete from com_image
+    where com_id = #{comId,jdbcType=INTEGER}
+  </delete>
+
   <insert id="insert" parameterType="edu.ynu.travel.entity.complaint.ComImgEntity" >
     <!--
       WARNING - @mbggenerated
