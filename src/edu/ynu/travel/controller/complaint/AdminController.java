@@ -25,7 +25,7 @@ public class AdminController {
 
     @RequestMapping(value = "/complaints/{cid}", method = RequestMethod.POST)
     public SimpleResponse verifyComplaint(@PathVariable int cid, @RequestBody String status){
-        if(status=="处理中" || status=="审核被驳"){
+        if(status.equals("处理中") || status.equals("审核被驳")){
             int i = complaintService.verifyComplaint(cid,status);
             return i==1? new SimpleResponse("审核成功","success"):new SimpleResponse("审核失败","fail");
         }else {
