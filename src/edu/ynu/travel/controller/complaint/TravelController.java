@@ -31,8 +31,9 @@ public class TravelController {
      * @return 投诉列表
      */
     @RequestMapping(value = "/{userId}/complaints", method = RequestMethod.GET)
-    public List<ComplaintEntity> getComplaintList(@PathVariable int userId){
-       return travellerService.getComplaintsByTid(userId);
+    public List<ComplaintEntity> getComplaintList(@PathVariable int userId,
+                                                  @RequestParam(name = "page") int page, @RequestParam("size") int size ){
+       return travellerService.getComplaintsByTid(userId , page ,size);
     }
 
     /***

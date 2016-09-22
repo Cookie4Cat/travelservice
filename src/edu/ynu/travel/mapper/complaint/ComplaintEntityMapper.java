@@ -5,6 +5,8 @@ import edu.ynu.travel.entity.complaint.ComplaintEntityExample;
 import edu.ynu.travel.message.com.ComplaintMap;
 import org.springframework.stereotype.Repository;
 
+import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
+
 import java.util.List;
 
 @Repository("complaintMapper")
@@ -17,6 +19,8 @@ public interface ComplaintEntityMapper {
     int insert(ComplaintEntity record);
 
     int insertSelective(ComplaintEntity record);
+
+    List<ComplaintEntity> selectByExample(ComplaintEntityExample example,PageBounds pageBounds);
 
     List<ComplaintEntity> selectByExample(ComplaintEntityExample example);
 

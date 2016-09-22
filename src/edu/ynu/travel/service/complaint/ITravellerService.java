@@ -10,7 +10,7 @@ import java.util.List;
 public interface ITravellerService {
     List<ComplaintMap> getComplaintInteraction(int id);
     ComplaintEntity getComplaintDetail(int id);
-    List<ComplaintEntity> getComplaintsByTid(int TId);
+    List<ComplaintEntity> getComplaintsByTid(int TId,int page,int size);
     int grade(ComplaintEntity record);
     int uploadComImg(MultipartFile file, int cid, String path);
     ComplaintEntity createComplaint(ComplaintEntity complaintEntity);

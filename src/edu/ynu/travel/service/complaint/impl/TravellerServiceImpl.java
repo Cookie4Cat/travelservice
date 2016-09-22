@@ -1,5 +1,6 @@
 package edu.ynu.travel.service.complaint.impl;
 
+import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import edu.ynu.travel.entity.complaint.ComImgEntity;
 import edu.ynu.travel.entity.complaint.ComTypeEntity;
 import edu.ynu.travel.entity.complaint.ComplaintEntity;
@@ -40,12 +41,13 @@ public class TravellerServiceImpl implements ITravellerService {
     }
 
     @Override
-    public List<ComplaintEntity> getComplaintsByTid(int TId) {
+    public List<ComplaintEntity> getComplaintsByTid(int TId, int page,int size) {
         complaintExample.setOrderByClause("create_at desc");
         ComplaintEntityExample.Criteria criteria  =  complaintExample.createCriteria();
         criteria.andUserIdEqualTo(TId);
         criteria.andReplyComIdEqualTo(0);
-        return complaintMapper.selectByExample(complaintExample);
+        PageBounds pageBounds = new PageBounds(page,size);
+        return complaintMapper.selectByExample(complaintExample,pageBounds);
     }
 
     @Override
