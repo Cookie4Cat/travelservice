@@ -13,7 +13,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping(value = "com/processor")
+@RequestMapping(value = "/com/processor")
 public class ProcessorController {
 
     @Resource
@@ -31,10 +31,10 @@ public class ProcessorController {
     }
 
     @RequestMapping(value = "/complaints/{cid}/reply", method = RequestMethod.POST)
-    public ComplaintMap replyComplaint(@PathVariable int cid, HttpServletRequest request,ComplaintEntity complaint,
-                                       @RequestParam(value = "files", required = false) MultipartFile[] files){
+    public ComplaintMap replyComplaint(@PathVariable int cid, HttpServletRequest request,ComplaintMap complaintMap,
+                                       @RequestParam(value = "file", required = false) MultipartFile[] files){
             String path = request.getSession().getServletContext().getRealPath("upload");
-            complaint.setReplyComId(cid);
-            return complaintService.replyComplaint(files,path,complaint);
+            complaintMap.setReplyComId(cid);
+            return complaintService.replyComplaint(files,path,complaintMap);
     }
 }

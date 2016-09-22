@@ -24,6 +24,6 @@ public interface IComplaintService {
     int verifyComplaint(int id ,String status);
     ComplaintMap getComplaint(int cid);
 
-    ComplaintMap replyComplaint(MultipartFile[] files,String path,ComplaintEntity complaint);
+    ComplaintMap replyComplaint(MultipartFile[] files,String path,ComplaintMap complaintMap);
 
 }

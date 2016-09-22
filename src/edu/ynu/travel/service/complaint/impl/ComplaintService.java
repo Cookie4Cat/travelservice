@@ -153,7 +153,33 @@ public class ComplaintService implements IComplaintService {
     }
 
     @Override
-    public ComplaintMap replyComplaint(MultipartFile[] files, String path, ComplaintEntity complaint) {
-        return null;
+    public ComplaintMap replyComplaint(MultipartFile[] files, String path, ComplaintMap complaintMap) {
+        List<ComImgEntity> comImgs = new ArrayList<>();
+        complaintMapper.insertSelective(complaintMap);
+        int id = complaintMap.getId();
+
+        if (null != files) {
+            for (int i = 0; i <= files.length - 1; i++) {
+                ComImgEntity comImgEntity = new ComImgEntity();
+                String fileName = UUID.randomUUID().toString();
+                File targetFile = new File(path, fileName);
+                if (!targetFile.exists()) {
+                    targetFile.mkdirs();
+                }
+                //存入图片
+                try {
+                    files[i].transferTo(targetFile);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                String url = "/upload/"+fileName;
+                comImgEntity.setImageUrl(url);
+                comImgEntity.setComId(id);
+                comImgMapper.insert(comImgEntity);
+                comImgs.add(comImgEntity);
+            }
+        }
+        complaintMap.setComImgs(comImgs);
+        return complaintMap;
     }
 }
