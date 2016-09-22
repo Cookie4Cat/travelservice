@@ -4,7 +4,7 @@ import edu.ynu.travel.entity.complaint.ComTypeEntity;
 import edu.ynu.travel.entity.complaint.ComplaintEntity;
 import edu.ynu.travel.message.com.ComplaintMap;
 import edu.ynu.travel.message.common.SimpleResponse;
-import edu.ynu.travel.service.complaint.ITravellerService;
+import edu.ynu.travel.service.complaint.IComplaintService;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,7 +23,7 @@ import java.util.List;
 @RequestMapping(value = "/com/traveller")
 public class TravelController {
     @Resource
-    private ITravellerService travellerService;
+    private IComplaintService complaintService;
 
     /***
      * 获取某个游客的投诉列表
@@ -33,7 +33,7 @@ public class TravelController {
     @RequestMapping(value = "/{userId}/complaints", method = RequestMethod.GET)
     public List<ComplaintEntity> getComplaintList(@PathVariable int userId,
                                                   @RequestParam(name = "page") int page, @RequestParam("size") int size ){
-       return travellerService.getComplaintsByTid(userId , page ,size);
+       return complaintService.getComplaintsByTId(userId , page ,size);
     }
 
     /***
@@ -43,12 +43,12 @@ public class TravelController {
      */
     @RequestMapping(value = "/complaints/{id}/interaction",method = RequestMethod.GET)
     public List<ComplaintMap> getComplaintInteraction(@PathVariable int id){
-        return travellerService.getComplaintInteraction(id);
+        return complaintService.getComplaintInteraction(id);
     }
 
     @RequestMapping(value = "/complaints/{id}",method = RequestMethod.GET)
     public ComplaintEntity getComplaintDetail(@PathVariable int id){
-        return travellerService.getComplaintDetail(id);
+        return complaintService.getComplaintDetail(id);
     }
 
     /***
@@ -63,7 +63,7 @@ public class TravelController {
                                @RequestParam(value = "file", required = false) MultipartFile file){
         if(null!=file){
             String path = request.getSession().getServletContext().getRealPath("upload");
-            if(travellerService.uploadComImg(file,cid,path) == 1){
+            if(complaintService.uploadComImg(file,cid,path) == 1){
                 return new SimpleResponse("上传成功","success");
             }else{
                 return new SimpleResponse("上传失败","error");
@@ -80,7 +80,7 @@ public class TravelController {
      */
     @RequestMapping(value = "/complaints",method = RequestMethod.POST)
     public ComplaintEntity createComplaint(@RequestBody ComplaintEntity complaintEntity){
-        return travellerService.createComplaint(complaintEntity);
+        return complaintService.createComplaint(complaintEntity);
     }
 
     /***
@@ -91,7 +91,7 @@ public class TravelController {
      */
     @RequestMapping(value = "/complaints/{cid}/reply",method = RequestMethod.POST)
     public ComplaintEntity replyComplaint(@PathVariable int cid,@RequestBody ComplaintEntity complaintEntity){
-        return travellerService.replyComplaint(cid, complaintEntity);
+        return complaintService.replyComplaint(cid, complaintEntity);
     }
 
     /***
@@ -103,7 +103,7 @@ public class TravelController {
     @RequestMapping(value = "/complaints/{cid}/stars",method = RequestMethod.POST)
     public SimpleResponse grade(@PathVariable int cid, @RequestBody ComplaintEntity complaintEntity){
         complaintEntity.setId(cid);
-        if(travellerService.grade(complaintEntity) == 1){
+        if(complaintService.updateStars(complaintEntity) == 1){
             return new SimpleResponse("评价成功","success");
         }else {
             return new SimpleResponse("评价失败","error");
@@ -117,7 +117,7 @@ public class TravelController {
      */
     @RequestMapping(value = "complaints/{cid}", method = RequestMethod.POST)
     public ComplaintEntity resubmitComplaint(@RequestBody ComplaintEntity complaintEntity){
-        travellerService.resubmitComplaint(complaintEntity);
+        complaintService.resubmitComplaint(complaintEntity);
         return complaintEntity;
     }
 
@@ -127,6 +127,6 @@ public class TravelController {
      */
     @RequestMapping(value = "/complaints/types", method = RequestMethod.GET)
     public List<ComTypeEntity> getAllTypes(){
-        return travellerService.getComTypes();
+        return complaintService.getComTypes();
     }
 }
