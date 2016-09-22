@@ -82,5 +82,6 @@
 
     <bean id="InfoService" class="edu.ynu.travel.service.emergency.impl.InfoServiceImpl"></bean>
     <bean id="IUserService" class="edu.ynu.travel.service.user.impl.UserServiceImpl"></bean>
+    <bean id="IComplaintService" class="edu.ynu.travel.service.complaint.impl.ComplaintService"></bean>
 
 </beans>
