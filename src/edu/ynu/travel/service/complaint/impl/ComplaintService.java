@@ -24,8 +24,6 @@ public class ComplaintService implements IComplaintService {
 
     @Resource(name = "complaintMapper")
     private ComplaintEntityMapper complaintMapper;
-    @Resource
-    private ComplaintEntityExample complaintExample;
     @Resource(name = "com_img")
     private ComImgEntityMapper comImgMapper;
     @Resource(name = "com_type")
@@ -55,6 +53,7 @@ public class ComplaintService implements IComplaintService {
 
     @Override
     public List<ComplaintEntity> getComplaintsByTId(int TId, int page, int size) {
+        ComplaintEntityExample complaintExample = new ComplaintEntityExample();
         complaintExample.setOrderByClause("create_at desc");
         ComplaintEntityExample.Criteria criteria  =  complaintExample.createCriteria();
         criteria.andUserIdEqualTo(TId);
@@ -130,6 +129,7 @@ public class ComplaintService implements IComplaintService {
 
     @Override
     public ComplaintList listComplaintsByStatus(int page, int size, String status) {
+        ComplaintEntityExample complaintExample = new ComplaintEntityExample();
         ComplaintEntityExample.Criteria criteria  =  complaintExample.createCriteria();
         criteria.andStatusEqualTo(status);
         PageBounds pageBounds = new PageBounds(page,size);
@@ -146,8 +146,7 @@ public class ComplaintService implements IComplaintService {
 
     @Override
     public int verifyComplaint(int id, String status) {
-        ComplaintEntity complaintEntity = new ComplaintEntity();
-        complaintEntity.setId(id);
+        ComplaintEntity complaintEntity = complaintMapper.selectByPrimaryKey(id);
         complaintEntity.setStatus(status);
         return complaintMapper.updateByPrimaryKeySelective(complaintEntity);
     }
