@@ -22,7 +22,7 @@ public class ProcessorController {
     @RequestMapping(value = "/complaints",method = RequestMethod.GET)
     public ComplaintList getAllHandling(@RequestParam(name = "page") int page,
                                         @RequestParam(name="size") int size){
-        return complaintService.listComplaintsInit(page,size);
+        return complaintService.listComplaintsByStatus(page,size,"处理中");
     }
 
     @RequestMapping(value = "/complaints/{cid}/interaction", method = RequestMethod.GET)

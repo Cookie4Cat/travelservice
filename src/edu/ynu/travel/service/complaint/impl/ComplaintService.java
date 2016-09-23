@@ -129,11 +129,16 @@ public class ComplaintService implements IComplaintService {
     }
 
     @Override
-    public ComplaintList listComplaintsInit(int page, int size) {
+    public ComplaintList listComplaintsByStatus(int page, int size, String status) {
         ComplaintEntityExample.Criteria criteria  =  complaintExample.createCriteria();
-        criteria.andStatusEqualTo("待审核");
+        criteria.andStatusEqualTo(status);
         PageBounds pageBounds = new PageBounds(page,size);
-        List complaints = complaintMapper.selectByExample(complaintExample,pageBounds);
+        List<ComplaintEntity> complaints;
+        try{
+            complaints = complaintMapper.selectByExample(complaintExample,pageBounds);
+        }catch (Exception e){
+            return null;
+        }
         PageList pageList = (PageList)complaints;
         int count = pageList.getPaginator().getTotalCount();
         return new ComplaintList(complaints,count);
