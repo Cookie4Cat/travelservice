@@ -10,9 +10,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-/**
- * Created by Administrator on 2016/9/23.
- */
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/scenic/admin")
@@ -21,21 +18,21 @@ public class SAdminController {
     @Resource
     private IScenicService scenicService;
 
-    @RequestMapping(value = "/scenics",method = RequestMethod.GET)
+    @RequestMapping(value = "/scenic",method = RequestMethod.GET)
     public List<ScenicEntity> allScenics(@RequestParam(name = "page") int page,
                                          @RequestParam(name = "size") int size){
-        return scenicService.listScenics(page,size);
+        return scenicService.listScenic(page,size);
     }
 
     @RequestMapping(value = "/scenic/{sid}",method = RequestMethod.GET)
     public ScenicMessage getScenicsDetail(@PathVariable int sid){
-        return scenicService.getSenicMessage(sid);
+        return scenicService.getScenicMessage(sid);
     }
 
     @RequestMapping(value = "/scenic", method = RequestMethod.POST)
     public ScenicMessage createScenic( HttpServletRequest request,ScenicMessage scenicMessage,
                                        @RequestParam(value = "file", required = false) MultipartFile[] files){
         String path = request.getSession().getServletContext().getRealPath("upload");
-        return scenicService.addSecenic(files,path,scenicMessage);
+        return scenicService.addScenic(files,path,scenicMessage);
     }
 }
