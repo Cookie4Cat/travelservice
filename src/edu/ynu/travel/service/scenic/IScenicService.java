@@ -1,6 +1,7 @@
 package edu.ynu.travel.service.scenic;
 
 import edu.ynu.travel.entity.scenic.ScenicEntity;
+import edu.ynu.travel.message.common.SimpleResponse;
 import edu.ynu.travel.message.scenic.ScenicMessage;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,4 +14,5 @@ public interface IScenicService {
     List<ScenicEntity> listScenic(int page,int size);
     ScenicMessage getScenicMessage(int id);
     ScenicMessage addScenic(MultipartFile[] files, String path,ScenicMessage scenicMessage);
+    SimpleResponse updateSenic(MultipartFile[] files, String path, ScenicMessage scenicMessage);
 }

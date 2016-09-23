@@ -48,7 +48,7 @@
   <sql id="Blob_Column_List" >
 
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="ScenicMap" parameterType="java.lang.Integer" >
   select
   <include refid="Base_Column_List" />
   ,i.id,i.foreign_id,i.url,i.title,i.model,i.description

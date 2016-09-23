@@ -5,6 +5,7 @@ import edu.ynu.travel.entity.common.ImageEntity;
 import edu.ynu.travel.entity.scenic.ScenicEntity;
 import edu.ynu.travel.mapper.common.ImageEntityMapper;
 import edu.ynu.travel.mapper.scenic.ScenicEntityMapper;
+import edu.ynu.travel.message.common.SimpleResponse;
 import edu.ynu.travel.message.scenic.ScenicMessage;
 import edu.ynu.travel.service.scenic.IScenicService;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,7 @@ public class ScenicServiceImpl implements IScenicService {
     }
 
     @Override
-    public ScenicMessage addScenic(MultipartFile[] files, String path,ScenicMessage scenicMessage) {
+    public ScenicMessage addScenic(MultipartFile[] files, String path, ScenicMessage scenicMessage) {
         List<ImageEntity> images = new ArrayList<>();
         scenicEntityMapper.insertSelective(scenicMessage);
         int sid =scenicMessage.getSid();
@@ -65,5 +66,36 @@ public class ScenicServiceImpl implements IScenicService {
         }
         scenicMessage.setImgs(images);
         return scenicMessage;
+    }
+
+    @Override
+    public SimpleResponse updateSenic(MultipartFile[] files, String path, ScenicMessage scenicMessage) {
+        List<ImageEntity> images = new ArrayList<>();
+        int id = scenicMessage.getSid();
+        scenicEntityMapper.updateByPrimaryKeySelective(scenicMessage);
+        if (null != files) {
+            for (int i = 0; i <= files.length - 1; i++) {
+                String fileName = UUID.randomUUID().toString();
+                File targetFile = new File(path, fileName);
+                if (!targetFile.exists()) {
+                    targetFile.mkdirs();
+                }
+                //存入图片
+                try {
+                    files[i].transferTo(targetFile);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                ImageEntity imageEntity = new ImageEntity();
+                String url = "/upload/"+fileName;
+                imageEntity.setForeignId(id);
+                imageEntity.setUrl(url);
+                imageEntity.setModel("scenic");
+                imageEntityMapper.insert(imageEntity);
+                images.add(imageEntity);
+            }
+        }
+        scenicMessage.setImgs(images);
+        return new SimpleResponse("更新成功","success");
     }
 }
