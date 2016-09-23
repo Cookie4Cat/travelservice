@@ -39,6 +39,7 @@ public class ScenicServiceImpl implements IScenicService {
 
     @Override
     public ScenicMessage addScenic(MultipartFile[] files, String path, ScenicMessage scenicMessage) {
+        System.out.println("------"+path+"-------");
         List<ImageEntity> images = new ArrayList<>();
         scenicEntityMapper.insertSelective(scenicMessage);
         int sid =scenicMessage.getSid();

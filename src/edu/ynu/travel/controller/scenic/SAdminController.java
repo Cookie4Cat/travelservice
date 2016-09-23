@@ -1,8 +1,10 @@
 package edu.ynu.travel.controller.scenic;
 
+import edu.ynu.travel.entity.common.ImageEntity;
 import edu.ynu.travel.entity.scenic.ScenicEntity;
 import edu.ynu.travel.message.common.SimpleResponse;
 import edu.ynu.travel.message.scenic.ScenicMessage;
+import edu.ynu.travel.service.image.ImageService;
 import edu.ynu.travel.service.scenic.IScenicService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,6 +20,8 @@ public class SAdminController {
 
     @Resource
     private IScenicService scenicService;
+    @Resource
+    private ImageService imageService;
 
     @RequestMapping(value = "/scenic",method = RequestMethod.GET)
     public List<ScenicEntity> allScenics(@RequestParam(name = "page") int page,
@@ -42,6 +46,11 @@ public class SAdminController {
                                       @RequestParam(value = "file") MultipartFile[] files){
         String path = request.getSession().getServletContext().getRealPath("upload");
         scenicMessage.setSid(sid);
-        return null;
+        return scenicService.updateSenic(files,path,scenicMessage);
     }
+
+    @RequestMapping(value = "/image/{id}", method = RequestMethod.DELETE)
+     public int deleteImage(@PathVariable int id){
+         return imageService.deleteImage(id);
+     }
 }
