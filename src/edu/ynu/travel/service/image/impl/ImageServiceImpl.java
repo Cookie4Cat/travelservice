@@ -16,11 +16,13 @@ public class ImageServiceImpl implements ImageService {
     @Resource(name = "ImageMapper")
     private ImageEntityMapper imageEntityMapper;
 
+    private static final String PATH = "C:\\Users\\Administrator\\IdeaProjects\\tour\\WebRoot";
+
     @Override
     public int deleteImage(int id) {
         ImageEntity imageEntity = imageEntityMapper.selectByPrimaryKey(id);
         String url = imageEntity.getUrl();
-        url = "C:\\Users\\Administrator\\IdeaProjects\\tour\\WebRoot"+url;
+        url = PATH + url;
         System.out.println(url);
         File targetFile = new File(url);
         return  targetFile.delete() ?imageEntityMapper.deleteByPrimaryKey(id):0;
