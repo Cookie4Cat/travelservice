@@ -1,7 +1,6 @@
 package edu.ynu.travel.controller.scenic;
 
-import edu.ynu.travel.entity.common.ImageEntity;
-import edu.ynu.travel.entity.scenic.ScenicEntity;
+
 import edu.ynu.travel.message.common.SimpleResponse;
 import edu.ynu.travel.message.scenic.ScenicList;
 import edu.ynu.travel.message.scenic.ScenicMessage;
@@ -12,7 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -25,13 +23,13 @@ public class SAdminController {
     private ImageService imageService;
 
     @RequestMapping(value = "/scenic",method = RequestMethod.GET)
-    public ScenicList allScenics(@RequestParam(name = "page") int page,
+    public ScenicList allScenic(@RequestParam(name = "page") int page,
                                  @RequestParam(name = "size") int size){
         return scenicService.listScenic(page,size);
     }
 
     @RequestMapping(value = "/scenic/{sid}",method = RequestMethod.GET)
-    public ScenicMessage getScenicsDetail(@PathVariable int sid){
+    public ScenicMessage getScenicDetail(@PathVariable int sid){
         return scenicService.getScenicMessage(sid);
     }
 
@@ -43,7 +41,7 @@ public class SAdminController {
     }
 
     @RequestMapping(value = "/scenic/{sid}", method = RequestMethod.POST)
-    public SimpleResponse updateSenic(HttpServletRequest request,ScenicMessage scenicMessage,@PathVariable int sid,
+    public SimpleResponse updateScenic(HttpServletRequest request,ScenicMessage scenicMessage,@PathVariable int sid,
                                       @RequestParam(value = "file") MultipartFile[] files){
         String path = request.getSession().getServletContext().getRealPath("upload");
         scenicMessage.setSid(sid);
