@@ -45,7 +45,7 @@ public class AAdminController {
         return articleService.updateArticle(id,file,path,articleEntity);
     }
 
-    @RequestMapping(value = "articles/{id}",method = RequestMethod.DELETE)
+    @RequestMapping(value = "articles/{id}/delete",method = RequestMethod.POST)
     public SimpleResponse deleteArticle(@PathVariable int id){
         return articleService.deleteArticle(id);
     }

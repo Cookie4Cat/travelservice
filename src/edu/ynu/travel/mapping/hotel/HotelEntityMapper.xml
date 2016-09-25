@@ -12,14 +12,14 @@
   </resultMap>
 
   <resultMap id="HotelMap" type="edu.ynu.travel.message.hotel.HotelMessage" >
-    <id column="id" property="id" jdbcType="INTEGER" />
+    <id column="h_id" property="id" jdbcType="INTEGER" />
     <result column="scenic_id" property="scenicId" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="VARCHAR" />
     <result column="total_room" property="totalRoom" jdbcType="TINYINT" />
     <result column="booked_room" property="bookedRoom" jdbcType="TINYINT" />
-    <collection property="Imgs" ofType="edu.ynu.travel.entity.common.ImageEntity" javaType="ArrayList">
+    <collection property="imgs" ofType="edu.ynu.travel.entity.common.ImageEntity" javaType="ArrayList">
       <id column="i_id" property="id" jdbcType="INTEGER" />
       <result column="foreign_id" property="foreignId" jdbcType="INTEGER" />
       <result column="url" property="url" jdbcType="VARCHAR" />
@@ -38,7 +38,7 @@
   </sql>
   <select id="selectByPrimaryKey" resultMap="HotelMap" parameterType="java.lang.Integer" >
     select 
-    <include refid="Base_Column_List" />
+    h.id as h_id, scenic_id, name, type, price, total_room, booked_room
     ,i.id as i_id,foreign_id,url,title,model,description
     from hot_hotel h LEFT JOIN image i on h.id = i.foreign_id AND i.model = "hotel"
     where h.id = #{id,jdbcType=INTEGER}
