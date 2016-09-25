@@ -1,8 +1,10 @@
 package edu.ynu.travel.service.article.impl;
 
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
+import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import edu.ynu.travel.entity.article.ArticleEntity;
 import edu.ynu.travel.mapper.article.ArticleEntityMapper;
+import edu.ynu.travel.message.article.ArticleList;
 import edu.ynu.travel.message.common.SimpleResponse;
 import edu.ynu.travel.service.article.IArticleService;
 import edu.ynu.travel.util.FileUtil;
@@ -22,9 +24,12 @@ public class ArticleServiceImpl implements IArticleService {
     private ArticleEntityMapper articleMapper;
 
     @Override
-    public List<ArticleEntity> listArtcles(int page, int size) {
+    public ArticleList listArtcles(int page, int size) {
         PageBounds pageBounds = new PageBounds(page,size);
-        return articleMapper.selectAll(pageBounds);
+        List<ArticleEntity> articles = articleMapper.selectAll(pageBounds);
+        PageList pageList = (PageList) articles;
+        int count = pageList.getPaginator().getTotalCount();
+        return new ArticleList(articles,count);
     }
 
     @Override

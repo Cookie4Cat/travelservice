@@ -1,15 +1,15 @@
-package edu.ynu.travel.service.scenic.impl;
+package edu.ynu.travel.service.hotel.impl;
 
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import edu.ynu.travel.entity.common.ImageEntity;
-import edu.ynu.travel.entity.scenic.ScenicEntity;
+import edu.ynu.travel.entity.hotel.HotelEntity;
 import edu.ynu.travel.mapper.common.ImageEntityMapper;
-import edu.ynu.travel.mapper.scenic.ScenicEntityMapper;
+import edu.ynu.travel.mapper.hotel.HotelEntityMapper;
 import edu.ynu.travel.message.common.SimpleResponse;
-import edu.ynu.travel.message.scenic.ScenicList;
-import edu.ynu.travel.message.scenic.ScenicMessage;
-import edu.ynu.travel.service.scenic.IScenicService;
+import edu.ynu.travel.message.hotel.HotelList;
+import edu.ynu.travel.message.hotel.HotelMessage;
+import edu.ynu.travel.service.hotel.IHotelService;
 import edu.ynu.travel.util.FileUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,59 +20,57 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Service
 @Transactional
-public class ScenicServiceImpl implements IScenicService {
+public class HotelServiceImpl implements IHotelService{
 
-    @Resource(name = "ScenicMapper")
-    private ScenicEntityMapper scenicEntityMapper;
+    @Resource(name = "HotelMapper")
+    private HotelEntityMapper hotelMapper;
     @Resource(name = "ImageMapper")
     private ImageEntityMapper imageEntityMapper;
 
     @Override
-    public ScenicList listScenic(int page, int size) {
+    public HotelList listHotel(int page,int size) {
         PageBounds pageBounds = new PageBounds(page,size);
-        List<ScenicEntity> scenic = scenicEntityMapper.selectAll(pageBounds);
-        PageList pageList = (PageList)scenic;
+        List<HotelEntity> hotels = hotelMapper.selectAll(pageBounds);
+        PageList pageList = (PageList) hotels;
         int count = pageList.getPaginator().getTotalCount();
-        return new ScenicList(count,scenic);
+        return new HotelList(count,pageList);
     }
 
     @Override
-    public ScenicMessage getScenicMessage(int id) {
-        return scenicEntityMapper.selectByPrimaryKey(id);
+    public HotelMessage getHotelById(int id) {
+        return hotelMapper.selectByPrimaryKey(id);
     }
 
     @Override
-    public ScenicMessage addScenic(MultipartFile[] files, String path, ScenicMessage scenicMessage) {
-        System.out.println("------"+path+"-------");
+    public HotelMessage addHotel(MultipartFile[] files, String path, HotelMessage hotelMessage) {
         List<ImageEntity> images = new ArrayList<>();
-        scenicEntityMapper.insertSelective(scenicMessage);
-        int sid =scenicMessage.getSid();
+        hotelMapper.insertSelective(hotelMessage);
+        int id =hotelMessage.getId();
         if (null != files) {
             for (int i = 0; i <= files.length - 1; i++) {
                 if(files[i].getSize()!=0) {
                     ImageEntity imageEntity = new ImageEntity();
                     String fileName = FileUtil.saveFile(path, files[i]);
                     String url = "/upload/" + fileName;
-                    imageEntity.setForeignId(sid);
+                    imageEntity.setForeignId(id);
                     imageEntity.setUrl(url);
-                    imageEntity.setModel("scenic");
+                    imageEntity.setModel("hotel");
                     imageEntityMapper.insert(imageEntity);
                     images.add(imageEntity);
                 }
             }
         }
-        scenicMessage.setImgs(images);
-        return scenicMessage;
+        hotelMessage.setImgs(images);
+        return hotelMessage;
     }
 
     @Override
-    public SimpleResponse updateScenic(MultipartFile[] files, String path, ScenicMessage scenicMessage) {
+    public SimpleResponse updateHotel( MultipartFile[] files, String path, HotelMessage hotelMessage) {
         List<ImageEntity> images = new ArrayList<>();
-        int id = scenicMessage.getSid();
-        scenicEntityMapper.updateByPrimaryKeySelective(scenicMessage);
+        int id = hotelMessage.getId();
+        hotelMapper.updateByPrimaryKeySelective(hotelMessage);
         if (null != files) {
             for (int i = 0; i <= files.length - 1; i++) {
                 if(files[i].getSize()!=0){
@@ -81,29 +79,28 @@ public class ScenicServiceImpl implements IScenicService {
                     String url = "/upload/"+fileName;
                     imageEntity.setForeignId(id);
                     imageEntity.setUrl(url);
-                    imageEntity.setModel("scenic");
+                    imageEntity.setModel("hotel");
                     imageEntityMapper.insert(imageEntity);
                     images.add(imageEntity);
                 }
             }
         }
-        scenicMessage.setImgs(images);
+        hotelMessage.setImgs(images);
         return new SimpleResponse("更新成功","success");
     }
 
     @Override
-    public int deleteScenic(int id) {
-        ScenicMessage scenicMessage = scenicEntityMapper.selectByPrimaryKey(id);
-        List<ImageEntity> imgs = scenicMessage.getImgs();
-        for (ImageEntity image: imgs) {
-            String url = image.getUrl();
-            url = FileUtil.PATH + url;
+    public SimpleResponse deleteHotel(int id) {
+        HotelMessage hotelMessage = hotelMapper.selectByPrimaryKey(id);
+        List<ImageEntity> images = hotelMessage.getImgs();
+        for (ImageEntity image: images) {
+            String url =FileUtil.PATH + image.getUrl();
             File targetFile = new File(url);
             if (targetFile.exists()) {
                 targetFile.delete();
             }
         }
         imageEntityMapper.deleteByForeignId(id);
-        return scenicEntityMapper.deleteByPrimaryKey(id);
+        return hotelMapper.deleteByPrimaryKey(id)==1?new SimpleResponse("删除成功","success"): new SimpleResponse("删除失败","fail");
     }
 }

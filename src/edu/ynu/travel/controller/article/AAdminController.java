@@ -1,20 +1,17 @@
 package edu.ynu.travel.controller.article;
 
 import edu.ynu.travel.entity.article.ArticleEntity;
+import edu.ynu.travel.message.article.ArticleList;
 import edu.ynu.travel.message.common.SimpleResponse;
 import edu.ynu.travel.service.article.IArticleService;
-import edu.ynu.travel.service.article.impl.ArticleServiceImpl;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.core.Request;
-import java.util.List;
 
-/**
- * Created by Administrator on 2016/9/23.
- */
+
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/article/admin")
@@ -23,8 +20,8 @@ public class AAdminController {
     private IArticleService articleService;
 
     @RequestMapping(value = "/articles", method = RequestMethod.GET)
-    public List<ArticleEntity> getAllArticle(@RequestParam(name = "page") int page,
-                                             @RequestParam(name = "size") int size){
+    public ArticleList getAllArticle(@RequestParam(name = "page") int page,
+                                     @RequestParam(name = "size") int size){
         return articleService.listArtcles(page,size);
     }
 

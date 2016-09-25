@@ -158,13 +158,15 @@ public class ComplaintService implements IComplaintService {
 
         if (null != files) {
             for (int i = 0; i <= files.length - 1; i++) {
-                ComImgEntity comImgEntity = new ComImgEntity();
-                String fileName = FileUtil.saveFile(path,files[i]);
-                String url = "/upload/"+fileName;
-                comImgEntity.setImageUrl(url);
-                comImgEntity.setComId(id);
-                comImgMapper.insert(comImgEntity);
-                comImgs.add(comImgEntity);
+                if(files[i].getSize()!=0) {
+                    ComImgEntity comImgEntity = new ComImgEntity();
+                    String fileName = FileUtil.saveFile(path, files[i]);
+                    String url = "/upload/" + fileName;
+                    comImgEntity.setImageUrl(url);
+                    comImgEntity.setComId(id);
+                    comImgMapper.insert(comImgEntity);
+                    comImgs.add(comImgEntity);
+                }
             }
         }
         complaintMap.setComImgs(comImgs);
