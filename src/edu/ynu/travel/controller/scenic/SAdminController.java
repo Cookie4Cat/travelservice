@@ -46,7 +46,7 @@ public class SAdminController {
                                       @RequestParam(value = "file") MultipartFile[] files){
         String path = request.getSession().getServletContext().getRealPath("upload");
         scenicMessage.setSid(sid);
-        return scenicService.updateSenic(files,path,scenicMessage);
+        return scenicService.updateScenic(files,path,scenicMessage);
     }
 
     @RequestMapping(value = "/image/{id}", method = RequestMethod.DELETE)
