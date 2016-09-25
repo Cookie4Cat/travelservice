@@ -35,7 +35,7 @@ public class HAdminController {
         return hotelService.addHotel(files,path,hotelMessage);
     }
 
-    @RequestMapping(value = "/scenic/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/hotels/{id}", method = RequestMethod.POST)
     public SimpleResponse updateHotel(HttpServletRequest request,HotelMessage hotelMessage, @PathVariable int id,
                                        @RequestParam(value = "file") MultipartFile[] files){
         String path = request.getSession().getServletContext().getRealPath("upload");
@@ -43,7 +43,7 @@ public class HAdminController {
         return hotelService.updateHotel(files,path,hotelMessage);
     }
 
-    @RequestMapping(value = "/scenic/{id}/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/hotels/{id}/delete", method = RequestMethod.POST)
     public SimpleResponse deleteHotel(@PathVariable int id){
         return hotelService.deleteHotel(id);
     }
