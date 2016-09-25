@@ -73,14 +73,16 @@ public class ScenicServiceImpl implements IScenicService {
         scenicEntityMapper.updateByPrimaryKeySelective(scenicMessage);
         if (null != files) {
             for (int i = 0; i <= files.length - 1; i++) {
-                String fileName =FileUtil.saveFile(path,files[i]);
-                ImageEntity imageEntity = new ImageEntity();
-                String url = "/upload/"+fileName;
-                imageEntity.setForeignId(id);
-                imageEntity.setUrl(url);
-                imageEntity.setModel("scenic");
-                imageEntityMapper.insert(imageEntity);
-                images.add(imageEntity);
+                if(files[i].getSize()!=0){
+                    String fileName =FileUtil.saveFile(path,files[i]);
+                    ImageEntity imageEntity = new ImageEntity();
+                    String url = "/upload/"+fileName;
+                    imageEntity.setForeignId(id);
+                    imageEntity.setUrl(url);
+                    imageEntity.setModel("scenic");
+                    imageEntityMapper.insert(imageEntity);
+                    images.add(imageEntity);
+                }
             }
         }
         scenicMessage.setImgs(images);
