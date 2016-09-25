@@ -3,6 +3,7 @@ package edu.ynu.travel.controller.scenic;
 import edu.ynu.travel.entity.common.ImageEntity;
 import edu.ynu.travel.entity.scenic.ScenicEntity;
 import edu.ynu.travel.message.common.SimpleResponse;
+import edu.ynu.travel.message.scenic.ScenicList;
 import edu.ynu.travel.message.scenic.ScenicMessage;
 import edu.ynu.travel.service.image.ImageService;
 import edu.ynu.travel.service.scenic.IScenicService;
@@ -24,8 +25,8 @@ public class SAdminController {
     private ImageService imageService;
 
     @RequestMapping(value = "/scenic",method = RequestMethod.GET)
-    public List<ScenicEntity> allScenics(@RequestParam(name = "page") int page,
-                                         @RequestParam(name = "size") int size){
+    public ScenicList allScenics(@RequestParam(name = "page") int page,
+                                 @RequestParam(name = "size") int size){
         return scenicService.listScenic(page,size);
     }
 

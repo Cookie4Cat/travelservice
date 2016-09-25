@@ -1,11 +1,13 @@
 package edu.ynu.travel.service.scenic.impl;
 
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
+import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import edu.ynu.travel.entity.common.ImageEntity;
 import edu.ynu.travel.entity.scenic.ScenicEntity;
 import edu.ynu.travel.mapper.common.ImageEntityMapper;
 import edu.ynu.travel.mapper.scenic.ScenicEntityMapper;
 import edu.ynu.travel.message.common.SimpleResponse;
+import edu.ynu.travel.message.scenic.ScenicList;
 import edu.ynu.travel.message.scenic.ScenicMessage;
 import edu.ynu.travel.service.scenic.IScenicService;
 import edu.ynu.travel.util.FileUtil;
@@ -29,9 +31,12 @@ public class ScenicServiceImpl implements IScenicService {
     private ImageEntityMapper imageEntityMapper;
 
     @Override
-    public List<ScenicEntity> listScenic(int page, int size) {
+    public ScenicList listScenic(int page, int size) {
         PageBounds pageBounds = new PageBounds(page,size);
-        return scenicEntityMapper.selectAll(pageBounds);
+        List<ScenicEntity> scenic = scenicEntityMapper.selectAll(pageBounds);
+        PageList pageList = (PageList)scenic;
+        int count = pageList.getPaginator().getTotalCount();
+        return new ScenicList(count,scenic);
     }
 
     @Override
