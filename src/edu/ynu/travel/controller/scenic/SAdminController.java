@@ -48,12 +48,12 @@ public class SAdminController {
         return scenicService.updateScenic(files,path,scenicMessage);
     }
 
-    @RequestMapping(value = "/image/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/image/{id}/delete", method = RequestMethod.POST)
      public int deleteImage(@PathVariable int id){
          return imageService.deleteImage(id);
      }
 
-    @RequestMapping(value = "/scenic/{id}",method = RequestMethod.DELETE)
+    @RequestMapping(value = "/scenic/{id}/delete",method = RequestMethod.POST)
     public int deleteScenic(@PathVariable int id){
         return scenicService.deleteScenic(id);
     }
