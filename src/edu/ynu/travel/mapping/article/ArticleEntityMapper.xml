@@ -34,21 +34,18 @@
     delete from article
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="edu.ynu.travel.entity.article.ArticleEntity" >
-    insert into article (id, title, publisher, 
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="edu.ynu.travel.entity.article.ArticleEntity" >
+    insert into article ( title, publisher,
       article_type, creat_at, article, 
       image_url)
-    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{publisher,jdbcType=VARCHAR}, 
+    values ( #{title,jdbcType=VARCHAR}, #{publisher,jdbcType=VARCHAR},
       #{articleType,jdbcType=VARCHAR}, #{creatAt,jdbcType=TIMESTAMP}, #{article,jdbcType=LONGVARCHAR}, 
       #{imageUrl,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="edu.ynu.travel.entity.article.ArticleEntity" >
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="edu.ynu.travel.entity.article.ArticleEntity" >
 
     insert into article
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="title != null" >
         title,
       </if>
@@ -58,9 +55,9 @@
       <if test="articleType != null" >
         article_type,
       </if>
-      <if test="creatAt != null" >
+
         creat_at,
-      </if>
+
       <if test="article != null" >
         article,
       </if>
@@ -81,9 +78,9 @@
       <if test="articleType != null" >
         #{articleType,jdbcType=VARCHAR},
       </if>
-      <if test="creatAt != null" >
-        #{creatAt,jdbcType=TIMESTAMP},
-      </if>
+
+        now(),
+
       <if test="article != null" >
         #{article,jdbcType=LONGVARCHAR},
       </if>

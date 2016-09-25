@@ -11,7 +11,7 @@ import java.util.List;
 @Repository("ScenicMapper")
 public interface ScenicEntityMapper {
 
-    int deletemaryKey(Integer sid);
+    int deleteByPrimaryKey(Integer sid);
 
 
     int insert(ScenicEntity record);

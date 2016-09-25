@@ -53,4 +53,9 @@ public class SAdminController {
      public int deleteImage(@PathVariable int id){
          return imageService.deleteImage(id);
      }
+
+    @RequestMapping(value = "/scenic/{id}",method = RequestMethod.DELETE)
+    public int deleteScenic(@PathVariable int id){
+        return scenicService.deleteScenic(id);
+    }
 }

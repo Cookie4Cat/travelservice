@@ -14,5 +14,6 @@ public interface IScenicService {
     List<ScenicEntity> listScenic(int page,int size);
     ScenicMessage getScenicMessage(int id);
     ScenicMessage addScenic(MultipartFile[] files, String path,ScenicMessage scenicMessage);
-    SimpleResponse updateSenic(MultipartFile[] files, String path, ScenicMessage scenicMessage);
+    SimpleResponse updateScenic(MultipartFile[] files, String path, ScenicMessage scenicMessage);
+    int deleteScenic(int id);
 }

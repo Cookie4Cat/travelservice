@@ -8,17 +8,19 @@ import edu.ynu.travel.mapper.scenic.ScenicEntityMapper;
 import edu.ynu.travel.message.common.SimpleResponse;
 import edu.ynu.travel.message.scenic.ScenicMessage;
 import edu.ynu.travel.service.scenic.IScenicService;
+import edu.ynu.travel.util.FileUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 
 @Service
+@Transactional
 public class ScenicServiceImpl implements IScenicService {
 
     @Resource(name = "ScenicMapper")
@@ -46,17 +48,7 @@ public class ScenicServiceImpl implements IScenicService {
         if (null != files) {
             for (int i = 0; i <= files.length - 1; i++) {
                ImageEntity imageEntity = new ImageEntity();
-                String fileName = UUID.randomUUID().toString();
-                File targetFile = new File(path, fileName);
-                if (!targetFile.exists()) {
-                    targetFile.mkdirs();
-                }
-                //存入图片
-                try {
-                    files[i].transferTo(targetFile);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                String fileName = FileUtil.saveFile(path,files[i]);
                 String url = "/upload/"+fileName;
                 imageEntity.setForeignId(sid);
                 imageEntity.setUrl(url);
@@ -70,23 +62,13 @@ public class ScenicServiceImpl implements IScenicService {
     }
 
     @Override
-    public SimpleResponse updateSenic(MultipartFile[] files, String path, ScenicMessage scenicMessage) {
+    public SimpleResponse updateScenic(MultipartFile[] files, String path, ScenicMessage scenicMessage) {
         List<ImageEntity> images = new ArrayList<>();
         int id = scenicMessage.getSid();
         scenicEntityMapper.updateByPrimaryKeySelective(scenicMessage);
         if (null != files) {
             for (int i = 0; i <= files.length - 1; i++) {
-                String fileName = UUID.randomUUID().toString();
-                File targetFile = new File(path, fileName);
-                if (!targetFile.exists()) {
-                    targetFile.mkdirs();
-                }
-                //存入图片
-                try {
-                    files[i].transferTo(targetFile);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                String fileName =FileUtil.saveFile(path,files[i]);
                 ImageEntity imageEntity = new ImageEntity();
                 String url = "/upload/"+fileName;
                 imageEntity.setForeignId(id);
@@ -98,5 +80,21 @@ public class ScenicServiceImpl implements IScenicService {
         }
         scenicMessage.setImgs(images);
         return new SimpleResponse("更新成功","success");
+    }
+
+    @Override
+    public int deleteScenic(int id) {
+        ScenicMessage scenicMessage = scenicEntityMapper.selectByPrimaryKey(id);
+        List<ImageEntity> imgs = scenicMessage.getImgs();
+        for (ImageEntity image: imgs) {
+            String url = image.getUrl();
+            url = FileUtil.PATH + url;
+            File targetFile = new File(url);
+            if (targetFile.exists()) {
+                targetFile.delete();
+            }
+        }
+        imageEntityMapper.deleteByForeignId(id);
+        return scenicEntityMapper.deleteByPrimaryKey(id);
     }
 }

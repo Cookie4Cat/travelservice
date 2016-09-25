@@ -12,6 +12,8 @@ import edu.ynu.travel.mapper.complaint.ComplaintEntityMapper;
 import edu.ynu.travel.message.com.ComplaintList;
 import edu.ynu.travel.message.com.ComplaintMap;
 import edu.ynu.travel.service.complaint.IComplaintService;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -19,7 +21,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import edu.ynu.travel.util.FileUtil;
 
+@Service
+@Transactional
 public class ComplaintService implements IComplaintService {
 
     @Resource(name = "complaintMapper")
@@ -72,18 +77,7 @@ public class ComplaintService implements IComplaintService {
     public int uploadComImg(MultipartFile file, int cid, String path) {
         if(null!=file){
             ComImgEntity comImgEntity = new ComImgEntity();
-            String fileName = UUID.randomUUID().toString();
-            File targetFile = new File(path, fileName);
-            if(!targetFile.exists()){
-                targetFile.mkdirs();
-            }
-            //存入图片
-            try {
-                file.transferTo(targetFile);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
+            String fileName = FileUtil.saveFile(path,file);
             //获取上传图片的url
             String url = "/upload/"+fileName;
             comImgEntity.setImageUrl(url);
@@ -165,17 +159,7 @@ public class ComplaintService implements IComplaintService {
         if (null != files) {
             for (int i = 0; i <= files.length - 1; i++) {
                 ComImgEntity comImgEntity = new ComImgEntity();
-                String fileName = UUID.randomUUID().toString();
-                File targetFile = new File(path, fileName);
-                if (!targetFile.exists()) {
-                    targetFile.mkdirs();
-                }
-                //存入图片
-                try {
-                    files[i].transferTo(targetFile);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                String fileName = FileUtil.saveFile(path,files[i]);
                 String url = "/upload/"+fileName;
                 comImgEntity.setImageUrl(url);
                 comImgEntity.setComId(id);
