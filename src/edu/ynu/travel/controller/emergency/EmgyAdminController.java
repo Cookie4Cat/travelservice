@@ -38,7 +38,7 @@ public class EmgyAdminController {
         return emergencyService.updateEmergency(emergencyEntity);
     }
 
-    @RequestMapping(value = "/emergency/{id}/delete",method = RequestMethod.POST)
+    @RequestMapping(value = "/emergencies/{id}/delete",method = RequestMethod.POST)
     public SimpleResponse deleteEmergency(@PathVariable int id){
         return emergencyService.deleteEmergency(id);
     }
