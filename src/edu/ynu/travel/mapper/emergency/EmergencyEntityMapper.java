@@ -28,4 +28,6 @@ public interface EmergencyEntityMapper {
 
 
     int updateByPrimaryKey(EmergencyEntity record);
+
+    List<EmergencyEntity> listBySid(PageBounds pageBounds,int sid);
 }
