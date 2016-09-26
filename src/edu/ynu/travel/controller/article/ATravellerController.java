@@ -8,7 +8,7 @@ import javax.annotation.Resource;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping(value = "/article/traveller")
+@RequestMapping(value = "/article/traveler")
 public class ATravellerController {
     @Resource
     private IArticleService articleService;
