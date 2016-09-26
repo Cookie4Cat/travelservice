@@ -37,7 +37,7 @@ public class HAdminController {
 
     @RequestMapping(value = "/hotels/{id}", method = RequestMethod.POST)
     public SimpleResponse updateHotel(HttpServletRequest request,HotelMessage hotelMessage, @PathVariable int id,
-                                       @RequestParam(value = "file") MultipartFile[] files){
+                                       @RequestParam(value = "file",required = false) MultipartFile[] files){
         String path = request.getSession().getServletContext().getRealPath("upload");
         hotelMessage.setId(id);
         return hotelService.updateHotel(files,path,hotelMessage);
