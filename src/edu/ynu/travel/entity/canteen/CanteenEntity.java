@@ -17,6 +17,9 @@ public class CanteenEntity {
     private String price;
 
 
+    private String specialty;
+
+
     public Integer getId() {
         return id;
     }
@@ -64,5 +67,13 @@ public class CanteenEntity {
 
     public void setPrice(String price) {
         this.price = price == null ? null : price.trim();
+    }
+
+    public String getSpecialty() {
+        return specialty;
+    }
+
+    public void setSpecialty(String specialty) {
+        this.specialty = specialty;
     }
 }
