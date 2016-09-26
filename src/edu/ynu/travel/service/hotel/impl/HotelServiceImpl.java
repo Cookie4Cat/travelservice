@@ -103,4 +103,10 @@ public class HotelServiceImpl implements IHotelService{
         imageEntityMapper.deleteByForeignId(id);
         return hotelMapper.deleteByPrimaryKey(id)==1?new SimpleResponse("删除成功","success"): new SimpleResponse("删除失败","fail");
     }
+
+    @Override
+    public List<HotelMessage> listByScenicId(int sid, int page, int size) {
+        PageBounds pageBounds = new PageBounds(page, size);
+        return hotelMapper.listByScenicId(pageBounds,sid);
+    }
 }

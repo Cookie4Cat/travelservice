@@ -29,4 +29,6 @@ public interface HotelEntityMapper {
 
 
     int updateByPrimaryKey(HotelEntity record);
+
+    List<HotelMessage> listByScenicId(PageBounds pageBounds,int sid);
 }
