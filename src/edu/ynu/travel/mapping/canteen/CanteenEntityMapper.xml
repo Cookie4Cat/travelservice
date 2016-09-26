@@ -43,7 +43,7 @@
     select
     c.id AS c_id, scenic_id, name, type, price
     ,i.id as i_id,foreign_id,url,title,model,description
-    from canteen c LEFT JOIN image i on c.id=i.id and i.model="canteen"
+    from canteen c LEFT JOIN image i on c.id=i.foreign_id and i.model="canteen"
     where c.id = #{id,jdbcType=INTEGER}
   </select>
 
