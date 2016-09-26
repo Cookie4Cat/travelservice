@@ -7,7 +7,7 @@
   <result column="name" property="name" jdbcType="VARCHAR" />
   <result column="type" property="type" jdbcType="VARCHAR" />
   <result column="price" property="price" jdbcType="VARCHAR" />
-  <result column="specialty" property="specialty" jdbcType="VACHAR"/>
+  <result column="specialty" property="specialty" jdbcType="VARCHAR"/>
 </resultMap>
   <resultMap id="CanteenMap" type="edu.ynu.travel.message.canteen.CanteenMessage" >
     <id column="c_id" property="id" jdbcType="INTEGER" />
@@ -15,7 +15,7 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="VARCHAR" />
-    <result column="specialty" property="specialty" jdbcType="VACHAR"/>
+    <result column="specialty" property="specialty" jdbcType="VARCHAR"/>
     <collection property="Imgs" ofType="edu.ynu.travel.entity.common.ImageEntity" javaType="ArrayList">
       <id column="i_id" property="id" jdbcType="INTEGER" />
       <result column="foreign_id" property="foreignId" jdbcType="INTEGER" />
