@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping(value = "scenic/traveller")
+@RequestMapping(value = "scenic/traveler")
 public class TravellerController {
     @Resource
     private IScenicService scenicService;
