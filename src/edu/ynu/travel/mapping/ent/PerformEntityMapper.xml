@@ -7,8 +7,7 @@
     <result column="address" property="address" jdbcType="VARCHAR" />
     <result column="content" property="content" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
-    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="time_frame" property="timeFrame" jdbcType="VARCHAR" />
   </resultMap>
 
   <resultMap id="PerformMap" type="edu.ynu.travel.message.ent.PerformMessage" >
@@ -17,8 +16,7 @@
     <result column="address" property="address" jdbcType="VARCHAR" />
     <result column="content" property="content" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
-    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="time_frame" property="timeFrame" jdbcType="VARCHAR" />
     <collection property="images" ofType="edu.ynu.travel.entity.common.ImageEntity" javaType="ArrayList">
       <id column="i_id" property="id" jdbcType="INTEGER" />
       <result column="foreign_id" property="foreignId" jdbcType="INTEGER" />
@@ -29,12 +27,12 @@
     </collection>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, scenic_id, address, content, name, start_time, end_time
+    id, scenic_id, address, content, name,time_frame
   </sql>
 
   <select id="selectByPrimaryKey" resultMap="PerformMap" parameterType="java.lang.Integer" >
     select 
-    e.id as p_id, scenic_id, address, content, name, start_time, end_time
+    e.id as p_id, scenic_id, address, content, name, time_frame
     ,i.id as i_id,foreign_id,url,title,model,description
     from ent_show_info e LEFT JOIN image i ON e.id = i.foreign_id AND i.model="ent"
     where e.id = #{id,jdbcType=INTEGER}
@@ -62,11 +60,9 @@
       This element was generated on Sun Sep 25 22:27:18 CST 2016.
     -->
     insert into ent_show_info (id, scenic_id, address, 
-      content, name, start_time, 
-      end_time)
+      content, name, time_frame)
     values (#{id,jdbcType=INTEGER}, #{scenicId,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, 
-      #{content,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, 
-      #{endTime,jdbcType=TIMESTAMP})
+      #{content,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},#{time_frame,jdbcType=VARCHAR},
   </insert>
   <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="edu.ynu.travel.entity.ent.PerformEntity" >
     <!--
@@ -91,11 +87,8 @@
       <if test="name != null" >
         name,
       </if>
-      <if test="startTime != null" >
-        start_time,
-      </if>
-      <if test="endTime != null" >
-        end_time,
+      <if test="timeFrame != null" >
+        time_frame,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -114,11 +107,8 @@
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="startTime != null" >
-        #{startTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="endTime != null" >
-        #{endTime,jdbcType=TIMESTAMP},
+      <if test="timeFrame != null" >
+        #{time_frame,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -142,11 +132,8 @@
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="startTime != null" >
-        start_time = #{startTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="endTime != null" >
-        end_time = #{endTime,jdbcType=TIMESTAMP},
+      <if test="timeFrame != null" >
+        time_frame = #{timeFrame,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -162,8 +149,7 @@
       address = #{address,jdbcType=VARCHAR},
       content = #{content,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
-      start_time = #{startTime,jdbcType=TIMESTAMP},
-      end_time = #{endTime,jdbcType=TIMESTAMP}
+      time_frame=#{timeFrame,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
