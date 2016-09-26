@@ -44,7 +44,7 @@ public class CAdminController {
         return canteenService.updateCanteen(files,path,canteenMessage);
     }
 
-    @RequestMapping(value = "/canteen/{id}/delete",method = RequestMethod.POST)
+    @RequestMapping(value = "/canteens/{id}/delete",method = RequestMethod.POST)
     public SimpleResponse deleteCanteen(@PathVariable int id){
         return canteenService.deleteCanteen(id);
     }
