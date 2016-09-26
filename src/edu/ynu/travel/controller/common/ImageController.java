@@ -8,13 +8,13 @@ import javax.annotation.Resource;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping(value = "/image")
+@RequestMapping(value = "/images")
 public class ImageController {
 
     @Resource
     private ImageService imageService;
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/{id}/delete", method = RequestMethod.POST)
     public int deleteImage(@PathVariable int id){
         return imageService.deleteImage(id);
     }
