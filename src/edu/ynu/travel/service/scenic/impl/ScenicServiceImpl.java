@@ -106,4 +106,10 @@ public class ScenicServiceImpl implements IScenicService {
         imageEntityMapper.deleteByForeignId(id);
         return scenicEntityMapper.deleteByPrimaryKey(id);
     }
+
+    @Override
+    public List<ScenicMessage> getScenicList(int page, int size) {
+        PageBounds pageBounds = new PageBounds(page,size);
+        return scenicEntityMapper.listAllScenic(pageBounds);
+    }
 }

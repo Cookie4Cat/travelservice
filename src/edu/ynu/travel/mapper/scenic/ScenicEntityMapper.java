@@ -31,4 +31,6 @@ public interface ScenicEntityMapper {
 
 
     int updateByPrimaryKey(ScenicEntity record);
+
+    List<ScenicMessage> listAllScenic(PageBounds pageBounds);
 }
