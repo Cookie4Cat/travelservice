@@ -17,20 +17,20 @@
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 
-		<javaModelGenerator targetPackage="edu.ynu.travel.entity.ent" targetProject="src">
+		<javaModelGenerator targetPackage="edu.ynu.travel.entity.canteen" targetProject="src">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 
-		<sqlMapGenerator targetPackage="edu.ynu.travel.mapping.ent" targetProject="src">
+		<sqlMapGenerator targetPackage="edu.ynu.travel.mapping.canteen" targetProject="src">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 
-		<javaClientGenerator type="XMLMAPPER" targetPackage="edu.ynu.travel.mapper.ent"  targetProject="src">
+		<javaClientGenerator type="XMLMAPPER" targetPackage="edu.ynu.travel.mapper.canteen"  targetProject="src">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
-			<table schema="travelapp" tableName="ent_show_info" domainObjectName="PerformEntity" enableCountByExample="false" enableUpdateByExample="false"
+			<table schema="travelapp" tableName="canteen" domainObjectName="CanteenEntity" enableCountByExample="false" enableUpdateByExample="false"
 			   enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
 		</table>
 	</context>

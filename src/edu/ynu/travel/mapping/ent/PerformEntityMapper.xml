@@ -19,7 +19,7 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
     <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
-    <collection property="Imgs" ofType="edu.ynu.travel.entity.common.ImageEntity" javaType="ArrayList">
+    <collection property="images" ofType="edu.ynu.travel.entity.common.ImageEntity" javaType="ArrayList">
       <id column="i_id" property="id" jdbcType="INTEGER" />
       <result column="foreign_id" property="foreignId" jdbcType="INTEGER" />
       <result column="url" property="url" jdbcType="VARCHAR" />
