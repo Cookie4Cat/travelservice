@@ -103,4 +103,10 @@ public class CanteenServiceImpl implements ICanteenService{
         canteenMapper.deleteByPrimaryKey(id);
         return new SimpleResponse("删除成功","success");
     }
+
+    @Override
+    public List<CanteenMessage> listCanteenBySId(int sid, int page, int size) {
+        PageBounds pageBounds = new PageBounds(page, size);
+        return canteenMapper.listCanteenBySId(pageBounds, sid);
+    }
 }

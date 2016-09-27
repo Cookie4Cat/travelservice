@@ -49,6 +49,14 @@
     where c.id = #{id,jdbcType=INTEGER}
   </select>
 
+  <select id="listCanteenBySId" resultMap="CanteenMap" parameterType="java.lang.Integer" >
+    select
+    c.id AS c_id, scenic_id, name, type, price,specialty
+    ,i.id as i_id,foreign_id,url,title,model,description
+    from canteen c LEFT JOIN image i on c.id=i.foreign_id and i.model="canteen"
+    where c.scenic_id = #{sid,jdbcType=INTEGER}
+  </select>
+
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from canteen

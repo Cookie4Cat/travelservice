@@ -25,4 +25,6 @@ public interface CanteenEntityMapper {
     int updateByPrimaryKeySelective(CanteenEntity record);
 
     int updateByPrimaryKey(CanteenEntity record);
+
+    List<CanteenMessage> listCanteenBySId(PageBounds pageBounds, int sid);
 }
