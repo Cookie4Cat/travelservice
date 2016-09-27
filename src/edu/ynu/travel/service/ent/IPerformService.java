@@ -6,6 +6,8 @@ import edu.ynu.travel.message.ent.PerformList;
 import edu.ynu.travel.message.ent.PerformMessage;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 
 public interface IPerformService {
     PerformMessage selectPerformById(int id);
@@ -13,4 +15,5 @@ public interface IPerformService {
     PerformMessage addPerform(MultipartFile[] files,String path,PerformMessage performMessage);
     SimpleResponse updatePerform(MultipartFile[] file, String path, PerformMessage performMessage);
     SimpleResponse deletePerform(int id);
+    List<PerformMessage> selectPerformBySId(int page, int size, int sid);
 }

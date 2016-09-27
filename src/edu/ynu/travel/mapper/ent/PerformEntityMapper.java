@@ -24,4 +24,6 @@ public interface PerformEntityMapper {
     int updateByPrimaryKeySelective(PerformEntity record);
 
     int updateByPrimaryKey(PerformEntity record);
+
+    List<PerformMessage> selectByScenicId(PageBounds pageBounds,int id);
 }

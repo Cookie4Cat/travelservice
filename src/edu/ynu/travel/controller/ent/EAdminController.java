@@ -47,4 +47,5 @@ public class EAdminController {
     public SimpleResponse deletePerform(@PathVariable int id){
         return performService.deletePerform(id);
     }
+
 }

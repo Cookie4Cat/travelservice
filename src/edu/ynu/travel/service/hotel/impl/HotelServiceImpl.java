@@ -100,7 +100,7 @@ public class HotelServiceImpl implements IHotelService{
                 targetFile.delete();
             }
         }
-        imageEntityMapper.deleteByForeignId(id);
+        imageEntityMapper.deleteByForeignId(id,"hotel");
         return hotelMapper.deleteByPrimaryKey(id)==1?new SimpleResponse("删除成功","success"): new SimpleResponse("删除失败","fail");
     }
 

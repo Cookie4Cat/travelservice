@@ -103,7 +103,7 @@ public class ScenicServiceImpl implements IScenicService {
                 targetFile.delete();
             }
         }
-        imageEntityMapper.deleteByForeignId(id);
+        imageEntityMapper.deleteByForeignId(id,"scenic");
         return scenicEntityMapper.deleteByPrimaryKey(id);
     }
 

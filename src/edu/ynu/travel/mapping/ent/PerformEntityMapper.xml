@@ -38,6 +38,13 @@
     where e.id = #{id,jdbcType=INTEGER}
   </select>
 
+  <select id="selectByScenicId" resultMap="PerformMap" parameterType="java.lang.Integer" >
+    select
+    e.id as p_id, scenic_id, address, content, name, time_frame
+    from ent_show_info e
+    where e.scenic_id = #{id,jdbcType=INTEGER}
+  </select>
+
   <select id="selectAll" resultMap="BaseResultMap" >
     select
     <include refid="Base_Column_List" />

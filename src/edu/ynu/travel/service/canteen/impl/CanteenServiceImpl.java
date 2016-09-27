@@ -99,7 +99,7 @@ public class CanteenServiceImpl implements ICanteenService{
                 targetFile.delete();
             }
         }
-        imageEntityMapper.deleteByForeignId(id);
+        imageEntityMapper.deleteByForeignId(id,"canteen");
         canteenMapper.deleteByPrimaryKey(id);
         return new SimpleResponse("删除成功","success");
     }

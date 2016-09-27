@@ -11,7 +11,7 @@ public interface ImageEntityMapper {
     int deleteByPrimaryKey(Integer id);
 
 
-    int deleteByForeignId(Integer id);
+    int deleteByForeignId(Integer id,String model);
 
 
     int insert(ImageEntity record);
