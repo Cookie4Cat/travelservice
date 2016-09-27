@@ -108,7 +108,7 @@ public class PerformServiceIpml implements IPerformService {
         List<PerformMessage> performMessages = performMapper.selectByScenicId(pageBounds,sid);
         for (PerformMessage perform: performMessages) {
             int id = perform.getId();
-            List<ImageEntity> images = imageEntityMapper.selectByForeignId(id,"perform");
+            List<ImageEntity> images = imageEntityMapper.selectByForeignId(id,"ent");
             perform.setImages(images);
         }
         return performMessages;
