@@ -4,6 +4,8 @@ import edu.ynu.travel.entity.user.RoleEntity;
 import edu.ynu.travel.entity.user.UserEntity;
 import edu.ynu.travel.mapper.user.RoleEntityMapper;
 import edu.ynu.travel.mapper.user.UserEntityMapper;
+import edu.ynu.travel.message.common.SimpleResponse;
+import edu.ynu.travel.message.user.LoginMessage;
 import edu.ynu.travel.message.user.UserMessage;
 import edu.ynu.travel.service.user.IUserService;
 import org.jvnet.hk2.annotations.Service;
@@ -32,7 +34,12 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public int addUser(UserEntity record) {
-        return userEntityMapper.insertSelective(record);
+    public SimpleResponse addUser(UserEntity record) {
+        return userEntityMapper.insertSelective(record)==1?new SimpleResponse("注册成功","success"):new SimpleResponse("注册失败","fail");
+    }
+
+    @Override
+    public UserEntity login(String username, String password) {
+        return userEntityMapper.login(username, password);
     }
 }

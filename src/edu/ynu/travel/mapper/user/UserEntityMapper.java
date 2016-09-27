@@ -18,6 +18,7 @@ public interface UserEntityMapper {
 
     UserMessage selectByPrimaryKey(Integer id);
 
+    UserEntity login(String usename, String password);
 
     int updateByPrimaryKeySelective(UserEntity record);
 

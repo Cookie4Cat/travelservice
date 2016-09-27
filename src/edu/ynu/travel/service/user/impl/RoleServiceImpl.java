@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 @Service
 @Transactional
@@ -21,4 +20,13 @@ public class RoleServiceImpl implements IRoleService{
         return roleEntityMapper.selectByPrimaryKey(id);
     }
 
+    @Override
+    public int addRole(RoleEntity roleEntity) {
+        return roleEntityMapper.insert(roleEntity);
+    }
+
+    @Override
+    public int deleteRoleById(int id) {
+        return roleEntityMapper.deleteByPrimaryKey(id);
+    }
 }

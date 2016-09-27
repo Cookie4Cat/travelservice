@@ -26,11 +26,15 @@ public interface ScenicEntityMapper {
     List<ScenicEntity> selectAll(PageBounds pageBounds);
 
 
+    List<ScenicEntity> selectAll();
+
+
     int updateByPrimaryKeySelective(ScenicEntity record);
 
 
 
     int updateByPrimaryKey(ScenicEntity record);
+
 
     List<ScenicMessage> listAllScenic(PageBounds pageBounds);
 }
