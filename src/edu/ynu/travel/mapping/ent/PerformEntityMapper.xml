@@ -126,7 +126,7 @@
       This element was generated on Sun Sep 25 22:27:18 CST 2016.
     -->
     update ent_show_info
-    <set >
+    <set>
       <if test="scenicId != null" >
         scenic_id = #{scenicId,jdbcType=INTEGER},
       </if>

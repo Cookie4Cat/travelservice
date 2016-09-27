@@ -57,7 +57,7 @@
 
   <delete id="deleteByForeignId">
     delete from image
-    where foreign_id = #{0} and model={1}
+    where foreign_id = #{0} and model=#{1}
   </delete>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >

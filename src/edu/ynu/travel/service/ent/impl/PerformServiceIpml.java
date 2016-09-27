@@ -97,7 +97,7 @@ public class PerformServiceIpml implements IPerformService {
                 targetFile.delete();
             }
         }
-        imageEntityMapper.deleteByForeignId(id,"perform");
+        imageEntityMapper.deleteByForeignId(id,"ent");
         performMapper.deleteByPrimaryKey(id);
         return new SimpleResponse("删除成功","success");
     }
@@ -108,7 +108,7 @@ public class PerformServiceIpml implements IPerformService {
         List<PerformMessage> performMessages = performMapper.selectByScenicId(pageBounds,sid);
         for (PerformMessage perform: performMessages) {
             int id = perform.getId();
-            List<ImageEntity> images = imageEntityMapper.selectByForeignId(id,"perform");
+            List<ImageEntity> images = imageEntityMapper.selectByForeignId(id,"ent");
             perform.setImages(images);
         }
         return performMessages;
