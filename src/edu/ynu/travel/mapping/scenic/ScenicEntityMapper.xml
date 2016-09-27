@@ -59,8 +59,7 @@
   <select id="listAllScenic" resultMap="ScenicMap">
     select
     <include refid="Base_Column_List" />
-    ,i.id,i.foreign_id,i.url,i.title,i.model,i.description
-    from scenic s LEFT JOIN image i ON s.sid = i.foreign_id AND i.model ="scenic"
+    from scenic s
   </select>
 
   <select id="selectAll" resultMap="BaseResultMap">
