@@ -97,7 +97,7 @@ public class PerformServiceIpml implements IPerformService {
                 targetFile.delete();
             }
         }
-        imageEntityMapper.deleteByForeignId(id,"perform");
+        imageEntityMapper.deleteByForeignId(id,"ent");
         performMapper.deleteByPrimaryKey(id);
         return new SimpleResponse("删除成功","success");
     }
