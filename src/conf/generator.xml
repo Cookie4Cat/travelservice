@@ -30,7 +30,7 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
-			<table schema="travelapp" tableName="user" domainObjectName="UserEntity" enableCountByExample="false" enableUpdateByExample="false"
+			<table schema="travelapp" tableName="role" domainObjectName="RoleEntity" enableCountByExample="false" enableUpdateByExample="false"
 			   enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
 		</table>
 	</context>

@@ -1,5 +1,9 @@
 package edu.ynu.travel.entity.user;
 
+
+import org.codehaus.jackson.annotate.JsonIgnore;
+
+
 public class UserEntity {
 
 
@@ -21,12 +25,6 @@ public class UserEntity {
     private Integer createdAt;
 
 
-    private Integer updatedAt;
-
-
-    private Integer phone;
-
-
     public Integer getId() {
         return id;
     }
@@ -46,7 +44,7 @@ public class UserEntity {
         this.username = username == null ? null : username.trim();
     }
 
-
+    @JsonIgnore
     public String getPasswordHash() {
         return passwordHash;
     }
@@ -83,24 +81,5 @@ public class UserEntity {
 
     public void setCreatedAt(Integer createdAt) {
         this.createdAt = createdAt;
-    }
-
-
-    public Integer getUpdatedAt() {
-        return updatedAt;
-    }
-
-
-    public void setUpdatedAt(Integer updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-
-    public Integer getPhone() {
-        return phone;
-    }
-
-    public void setPhone(Integer phone) {
-        this.phone = phone;
     }
 }
