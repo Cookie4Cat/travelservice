@@ -47,13 +47,11 @@
   <select id="listByScenicId" resultMap="HotelMap" parameterType="java.lang.Integer" >
     select
     h.id as h_id, scenic_id, name, type, price, total_room, booked_room
-    ,i.id as i_id,foreign_id,url,title,model,description
-    from hot_hotel h LEFT JOIN image i on h.id = i.foreign_id AND i.model = "hotel"
+    from hot_hotel h
     where h.scenic_id = #{sid,jdbcType=INTEGER}
   </select>
 
   <select id="selectAll" resultMap="BaseResultMap" >
-
     select
     <include refid="Base_Column_List" />
     from hot_hotel

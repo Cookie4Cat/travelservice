@@ -51,8 +51,7 @@
   <select id="selectByPrimaryKey" resultMap="ScenicMap" parameterType="java.lang.Integer" >
   select
   <include refid="Base_Column_List" />
-  ,i.id,i.foreign_id,i.url,i.title,i.model,i.description
-  from scenic s LEFT JOIN image i ON s.sid = i.foreign_id AND i.model ="scenic"
+  from scenic s
   where s.sid = #{sid,jdbcType=INTEGER}
 </select>
 

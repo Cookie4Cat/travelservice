@@ -107,6 +107,12 @@ public class CanteenServiceImpl implements ICanteenService{
     @Override
     public List<CanteenMessage> listCanteenBySId(int sid, int page, int size) {
         PageBounds pageBounds = new PageBounds(page, size);
-        return canteenMapper.listCanteenBySId(pageBounds, sid);
+        List<CanteenMessage> canteenMessages = canteenMapper.listCanteenBySId(pageBounds, sid);
+        for (CanteenMessage canteen: canteenMessages) {
+            int id = canteen.getId();
+            List<ImageEntity> images = imageEntityMapper.selectByForeignId(id,"canteen");
+            canteen.setImgs(images);
+        }
+        return canteenMessages;
     }
 }

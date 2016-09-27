@@ -9,14 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
-/**
- * Created by Administrator on 2016/9/4.
- */
+
 @Service
 @Transactional
 public class UserServiceImpl implements IUserService {
 
-    @Resource(name = "userMapper")
+    @Resource(name = "UserMapper")
     private UserEntityMapper userEntityMapper;
 
     @Override

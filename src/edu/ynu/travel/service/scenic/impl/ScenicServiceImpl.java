@@ -110,6 +110,12 @@ public class ScenicServiceImpl implements IScenicService {
     @Override
     public List<ScenicMessage> getScenicList(int page, int size) {
         PageBounds pageBounds = new PageBounds(page,size);
-        return scenicEntityMapper.listAllScenic(pageBounds);
+        List<ScenicMessage> scenicMessages = scenicEntityMapper.listAllScenic(pageBounds);
+        for (ScenicMessage scenic: scenicMessages) {
+            int id = scenic.getSid();
+            List<ImageEntity> images = imageEntityMapper.selectByForeignId(id,"scenic");
+            scenic.setImgs(images);
+        }
+        return scenicMessages;
     }
 }

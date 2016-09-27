@@ -14,7 +14,7 @@ public class CTravelerController {
     @Resource
     private ICanteenService canteenService;
 
-    @RequestMapping(value = "/scenic/{sid}/canteens")
+    @RequestMapping(value = "/scenic/{sid}/canteens",method = RequestMethod.GET)
     public List<CanteenMessage> listBySid(@RequestParam(name = "page") int page,
                                           @RequestParam(name = "size") int size, @PathVariable int sid){
         return canteenService.listCanteenBySId(sid,page,size);

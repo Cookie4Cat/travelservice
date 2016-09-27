@@ -107,6 +107,12 @@ public class HotelServiceImpl implements IHotelService{
     @Override
     public List<HotelMessage> listByScenicId(int sid, int page, int size) {
         PageBounds pageBounds = new PageBounds(page, size);
-        return hotelMapper.listByScenicId(pageBounds,sid);
+        List<HotelMessage> hotelMessages = hotelMapper.listByScenicId(pageBounds,sid);
+        for (HotelMessage hotel: hotelMessages) {
+            int id = hotel.getId();
+            List<ImageEntity> images = imageEntityMapper.selectByForeignId(id,"hotel");
+            hotel.setImgs(images);
+        }
+        return hotelMessages;
     }
 }

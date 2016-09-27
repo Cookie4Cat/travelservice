@@ -3,6 +3,8 @@ package edu.ynu.travel.mapper.common;
 import edu.ynu.travel.entity.common.ImageEntity;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository("ImageMapper")
 public interface ImageEntityMapper {
 
@@ -19,6 +21,9 @@ public interface ImageEntityMapper {
 
 
     ImageEntity selectByPrimaryKey(Integer id);
+
+
+    List<ImageEntity> selectByForeignId(Integer id,String model);
 
 
     int updateByPrimaryKeySelective(ImageEntity record);
