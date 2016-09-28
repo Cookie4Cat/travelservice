@@ -1,5 +1,6 @@
 package edu.ynu.travel.mapper.user;
 
+import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import edu.ynu.travel.entity.user.RoleEntity;
 import edu.ynu.travel.message.user.RoleMessage;
 import org.springframework.stereotype.Repository;
@@ -29,6 +30,9 @@ public interface RoleEntityMapper {
 
 
     List<RoleEntity> selectAll();
+
+
+    List<RoleEntity> selectAll(PageBounds pageBounds);
 
 
     RoleEntity selectByPrimaryKey(Integer id);

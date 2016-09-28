@@ -1,6 +1,8 @@
 package edu.ynu.travel.mapper.user;
 
+import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import edu.ynu.travel.entity.user.MenuEntity;
+import edu.ynu.travel.message.user.MenuList;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -28,6 +30,7 @@ public interface MenuEntityMapper {
 
     List<MenuEntity> selectAll();
 
+    List<MenuEntity> selectAll(PageBounds pageBounds);
 
     int updateByPrimaryKeySelective(MenuEntity record);
 

@@ -1,10 +1,13 @@
 package edu.ynu.travel.service.user.impl;
 
+import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
+import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import edu.ynu.travel.entity.user.MenuEntity;
 import edu.ynu.travel.entity.user.RoleEntity;
 import edu.ynu.travel.mapper.user.MenuEntityMapper;
 import edu.ynu.travel.mapper.user.RoleEntityMapper;
 import edu.ynu.travel.message.common.SimpleResponse;
+import edu.ynu.travel.message.user.RoleList;
 import edu.ynu.travel.message.user.RoleMessage;
 import edu.ynu.travel.service.user.IRoleService;
 import org.springframework.stereotype.Service;
@@ -34,6 +37,15 @@ public class RoleServiceImpl implements IRoleService{
     @Override
     public List<RoleEntity> listAllRole() {
         return roleEntityMapper.selectAll();
+    }
+
+    @Override
+    public RoleList listAllRole(int page, int size) {
+        PageBounds pageBounds = new PageBounds(page,size);
+        List<RoleEntity> roleEntities = roleEntityMapper.selectAll(pageBounds);
+        PageList pageList = (PageList) roleEntities;
+        int count = pageList.getPaginator().getTotalCount();
+        return new RoleList(pageList,count);
     }
 
     @Override

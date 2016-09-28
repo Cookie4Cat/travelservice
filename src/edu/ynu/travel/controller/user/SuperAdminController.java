@@ -47,6 +47,12 @@ public class SuperAdminController{
         return roleService.getRoleById(id);
     }
 
+    @RequestMapping(value = "/roles",method = RequestMethod.GET)
+    public RoleList getAllRole(@RequestParam(name = "page") int page,
+                               @RequestParam(name = "size") int size){
+        return roleService.listAllRole(page,size);
+    }
+
     @RequestMapping(value = "/roles/menus", method = RequestMethod.POST)
     public SimpleResponse addRoleMenu(@RequestBody RoleMessage role){
         return roleService.addRoleMenu(role);
@@ -74,6 +80,12 @@ public class SuperAdminController{
     @RequestMapping(value = "/menus/{id}",method = RequestMethod.GET)
     public MenuEntity getMenu(@PathVariable int id){
         return menuService.getMenuById(id);
+    }
+
+    @RequestMapping(value = "/menus",method = RequestMethod.GET)
+    public MenuList getAllMenu(@RequestParam(name = "page") int page,
+                                 @RequestParam(name = "size") int size){
+        return menuService.listAll(page,size);
     }
 
     @RequestMapping(value = "/menus", method = RequestMethod.POST)
