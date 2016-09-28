@@ -8,6 +8,7 @@ import edu.ynu.travel.message.user.UserMessage;
 
 public interface IUserService{
     UserMessage getUser(Integer id);
+    SimpleResponse addUserRole(UserMessage userMessage);
     SimpleResponse addUser(UserEntity record);
     UserEntity login(String username, String password);
 }

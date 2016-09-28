@@ -9,8 +9,12 @@ public interface UserEntityMapper {
 
     int deleteByPrimaryKey(Integer id);
 
+    int deleteUserRoleByUId(int id);
 
     int insert(UserEntity record);
+
+
+    int insertUserRole(int userId, int roleId);
 
 
     int insertSelective(UserEntity record);
@@ -18,7 +22,9 @@ public interface UserEntityMapper {
 
     UserMessage selectByPrimaryKey(Integer id);
 
+
     UserEntity login(String usename, String password);
+
 
     int updateByPrimaryKeySelective(UserEntity record);
 

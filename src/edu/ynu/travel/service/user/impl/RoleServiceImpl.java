@@ -44,12 +44,18 @@ public class RoleServiceImpl implements IRoleService{
     @Override
     public SimpleResponse addRoleMenu(RoleMessage roleMessage) {
         int roleId = roleMessage.getId();
+        roleEntityMapper.deleteRoleMenuByRId(roleId);
         List<MenuEntity> menus = roleMessage.getMenus();
         for (MenuEntity menu: menus) {
             int menuId = menu.getId();
             roleEntityMapper.insertRoleMenu(roleId,menuId);
         }
         return new SimpleResponse("菜单成功添加","success");
+    }
+
+    @Override
+    public int updateRole(RoleEntity roleEntity) {
+        return roleEntityMapper.updateByPrimaryKey(roleEntity);
     }
 
     @Override

@@ -39,6 +39,18 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    public SimpleResponse addUserRole(UserMessage userMessage) {
+        int userId = userMessage.getId();
+        userEntityMapper.deleteUserRoleByUId(userId);
+        List<RoleEntity> roles = userMessage.getRoles();
+        for (RoleEntity role:roles){
+            int roleId = role.getId();
+            userEntityMapper.insertUserRole(userId,roleId);
+        }
+        return new SimpleResponse("用户角色添加成功","success");
+    }
+
+    @Override
     public UserEntity login(String username, String password) {
         return userEntityMapper.login(username, password);
     }

@@ -56,6 +56,11 @@
   </delete>
 
 
+  <delete id="deleteRoleMenuByRId" parameterType="java.lang.Integer" >
+    delete from role_menu_assc
+    where role_id = #{id,jdbcType=INTEGER}
+  </delete>
+
   <insert id="insertRoleMenu" >
     insert into role_menu_assc (role_id, menu_id)
     values (#{0}, #{1})

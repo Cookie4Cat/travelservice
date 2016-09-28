@@ -1,5 +1,6 @@
 package edu.ynu.travel.controller.user;
 
+import edu.ynu.travel.entity.user.MenuEntity;
 import edu.ynu.travel.entity.user.RoleEntity;
 import edu.ynu.travel.entity.user.UserEntity;
 import edu.ynu.travel.message.common.SimpleResponse;
@@ -7,6 +8,7 @@ import edu.ynu.travel.message.user.LoginMessage;
 import edu.ynu.travel.message.user.RegistMessage;
 import edu.ynu.travel.message.user.RoleMessage;
 import edu.ynu.travel.message.user.UserMessage;
+import edu.ynu.travel.service.user.IMenuService;
 import edu.ynu.travel.service.user.IRoleService;
 import edu.ynu.travel.service.user.IUserService;
 import edu.ynu.travel.util.MD5Util;
@@ -22,6 +24,8 @@ public class SuperAdminController{
     private IUserService userService;
     @Resource
     private IRoleService roleService;
+    @Resource
+    private IMenuService menuService;
 
     @RequestMapping(value = "/users/{id}",method = RequestMethod.GET)
     public UserMessage getUser(@PathVariable int id){
@@ -44,21 +48,55 @@ public class SuperAdminController{
         return roleService.addRole(roleEntity);
     }
 
+    @RequestMapping(value = "/roles/{id}", method = RequestMethod.POST)
+    public int updateRole(@RequestBody RoleEntity roleEntity,@PathVariable int id){
+        roleEntity.setId(id);
+        return roleService.updateRole(roleEntity);
+    }
+
     @RequestMapping(value = "/roles/{id}/delete", method = RequestMethod.POST)
     public int deleteRole(@PathVariable int id){
         return roleService.deleteRoleById(id);
     }
 
+
+
+    @RequestMapping(value = "/menus/{id}",method = RequestMethod.GET)
+    public MenuEntity getMenu(@PathVariable int id){
+        return menuService.getMenuById(id);
+    }
+
+    @RequestMapping(value = "/menus", method = RequestMethod.POST)
+    public int addMenu(@RequestBody MenuEntity menuEntity){
+        return menuService.addMenu(menuEntity);
+    }
+
+    @RequestMapping(value = "/menus/{id}", method = RequestMethod.POST)
+    public int updateMenu(@RequestBody MenuEntity menuEntity,@PathVariable int id){
+        menuEntity.setId(id);
+        return menuService.updateMenu(menuEntity);
+    }
+
+    @RequestMapping(value = "/menus/{id}/delete", method = RequestMethod.POST)
+    public int deleteMenu(@PathVariable int id){
+        return menuService.deleteMenu(id);
+    }
+
     @RequestMapping(value = "/users",method = RequestMethod.POST)
     public SimpleResponse addAdmin(@RequestBody RegistMessage regist){
         String passwordHash = MD5Util.GetMD5Code(regist.getPassword());
-        short status = (short)10;
+        short status = 1;
         UserEntity userInsert = new UserEntity();
         userInsert.setUsername(regist.getUsername());
         userInsert.setEmail(regist.getEmail());
         userInsert.setPasswordHash(passwordHash);
         userInsert.setStatus(status);
         return userService.addUser(userInsert);
+    }
+
+    @RequestMapping(value = "/users/roles",method = RequestMethod.POST)
+    public  SimpleResponse addUserRole(@RequestBody UserMessage user){
+        return userService.addUserRole(user);
     }
 
     @RequestMapping(value = "/users/login", method = RequestMethod.POST)

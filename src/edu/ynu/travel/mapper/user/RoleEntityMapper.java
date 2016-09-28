@@ -13,6 +13,9 @@ public interface RoleEntityMapper {
     int deleteByPrimaryKey(Integer id);
 
 
+    int deleteRoleMenuByRId(Integer id);
+
+
     int insertRoleMenu(int roleId, int menuId);
 
 
@@ -35,9 +38,6 @@ public interface RoleEntityMapper {
 
 
     int updateByPrimaryKeySelective(RoleEntity record);
-
-
-    int updateByPrimaryKeyWithBLOBs(RoleEntity record);
 
 
     int updateByPrimaryKey(RoleEntity record);
