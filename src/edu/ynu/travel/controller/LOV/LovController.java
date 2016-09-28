@@ -29,7 +29,7 @@ public class LovController {
     @Resource
     private IRoleService roleService;
 
-    @RequestMapping(value = "/complaints/types", method = RequestMethod.GET)
+    @RequestMapping(value = "/com-type", method = RequestMethod.GET)
     public List<ComTypeEntity> getAllTypes(){
         return complaintService.getComTypes();
     }
@@ -39,12 +39,12 @@ public class LovController {
         return scenicService.listAllScenic();
     }
 
-    @RequestMapping(value = "/users/menus",method = RequestMethod.GET)
+    @RequestMapping(value = "/menu",method = RequestMethod.GET)
     public List<MenuEntity> getAllMenu(){
         return menuService.listAll();
     }
 
-    @RequestMapping(value = "/users/roles",method = RequestMethod.GET)
+    @RequestMapping(value = "/role",method = RequestMethod.GET)
     public List<RoleEntity> gatAllRole(){
         return roleService.listAllRole();
     }
