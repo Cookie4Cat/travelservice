@@ -1,8 +1,11 @@
 package edu.ynu.travel.mapper.user;
 
+import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import edu.ynu.travel.entity.user.UserEntity;
 import edu.ynu.travel.message.user.UserMessage;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository("UserMapper")
 public interface UserEntityMapper {
@@ -24,6 +27,9 @@ public interface UserEntityMapper {
 
 
     UserEntity login(String usename, String password);
+
+
+    List<UserEntity> selectAdmin(PageBounds pageBounds);
 
 
     int updateByPrimaryKeySelective(UserEntity record);

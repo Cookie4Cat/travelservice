@@ -1,11 +1,14 @@
 package edu.ynu.travel.service.user.impl;
 
+import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
+import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import edu.ynu.travel.entity.user.RoleEntity;
 import edu.ynu.travel.entity.user.UserEntity;
 import edu.ynu.travel.mapper.user.RoleEntityMapper;
 import edu.ynu.travel.mapper.user.UserEntityMapper;
 import edu.ynu.travel.message.common.SimpleResponse;
 import edu.ynu.travel.message.user.LoginMessage;
+import edu.ynu.travel.message.user.UserList;
 import edu.ynu.travel.message.user.UserMessage;
 import edu.ynu.travel.service.user.IUserService;
 import org.jvnet.hk2.annotations.Service;
@@ -31,6 +34,15 @@ public class UserServiceImpl implements IUserService {
         List<RoleEntity> roles = roleEntityMapper.selectByUserId(id);
         userMessage.setRoles(roles);
         return userMessage;
+    }
+
+    @Override
+    public UserList getAdmin(int page, int size) {
+        PageBounds pageBounds = new PageBounds(page,size);
+        List<UserEntity> userEntities = userEntityMapper.selectAdmin(pageBounds);
+        PageList pageList = (PageList) userEntities;
+        int count = pageList.getPaginator().getTotalCount();
+        return new UserList(count,userEntities);
     }
 
     @Override

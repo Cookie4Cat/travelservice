@@ -4,10 +4,7 @@ import edu.ynu.travel.entity.user.MenuEntity;
 import edu.ynu.travel.entity.user.RoleEntity;
 import edu.ynu.travel.entity.user.UserEntity;
 import edu.ynu.travel.message.common.SimpleResponse;
-import edu.ynu.travel.message.user.LoginMessage;
-import edu.ynu.travel.message.user.RegistMessage;
-import edu.ynu.travel.message.user.RoleMessage;
-import edu.ynu.travel.message.user.UserMessage;
+import edu.ynu.travel.message.user.*;
 import edu.ynu.travel.service.user.IMenuService;
 import edu.ynu.travel.service.user.IRoleService;
 import edu.ynu.travel.service.user.IUserService;
@@ -27,6 +24,13 @@ public class SuperAdminController{
     private IRoleService roleService;
     @Resource
     private IMenuService menuService;
+
+
+    @RequestMapping(value = "/users",method = RequestMethod.GET)
+    public UserList getUser(@RequestParam(name = "page") int page,
+                            @RequestParam(name = "size") int size){
+        return userService.getAdmin(page,size);
+    }
 
     @RequestMapping(value = "/users/{id}",method = RequestMethod.GET)
     public UserMessage getUser(@PathVariable int id){

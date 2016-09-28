@@ -33,6 +33,13 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
 
+  <select id="selectAdmin" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where status != 0
+  </select>
+
   <select id="login" resultMap="BaseResultMap">
     select
     id , username
