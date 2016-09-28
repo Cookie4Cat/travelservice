@@ -23,6 +23,9 @@ public interface MenuEntityMapper {
     List<MenuEntity> selectByRoleId(Integer id);
 
 
+    List<MenuEntity> selectByUserId(Integer id);
+
+
     List<MenuEntity> selectAll();
 
 

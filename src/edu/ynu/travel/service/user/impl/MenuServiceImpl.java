@@ -26,6 +26,11 @@ public class MenuServiceImpl implements IMenuService {
     }
 
     @Override
+    public List<MenuEntity> getMenuByUId(int id) {
+        return menuEntityMapper.selectByUserId(id);
+    }
+
+    @Override
     public int deleteMenu(int id) {
         return menuEntityMapper.deleteByPrimaryKey(id);
     }

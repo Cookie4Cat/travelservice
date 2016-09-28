@@ -15,6 +15,7 @@ import edu.ynu.travel.util.MD5Util;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -30,6 +31,11 @@ public class SuperAdminController{
     @RequestMapping(value = "/users/{id}",method = RequestMethod.GET)
     public UserMessage getUser(@PathVariable int id){
         return userService.getUser(id);
+    }
+
+    @RequestMapping(value = "/users/{id}/menus",method = RequestMethod.GET)
+    public List<MenuEntity> getMenuByUId(@PathVariable int id){
+        return menuService.getMenuByUId(id);
     }
 
     @RequestMapping(value = "/roles/{id}",method = RequestMethod.GET)

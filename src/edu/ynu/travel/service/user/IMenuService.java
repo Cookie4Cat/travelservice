@@ -9,6 +9,7 @@ import java.util.List;
 public interface IMenuService {
     MenuEntity getMenuById(int id);
     List<MenuEntity> listAll();
+    List<MenuEntity> getMenuByUId(int id);
     int addMenu(MenuEntity menuEntity);
     int updateMenu(MenuEntity menuEntity);
     int deleteMenu(int id);

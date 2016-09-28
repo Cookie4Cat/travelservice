@@ -25,6 +25,14 @@
     where r.role_id = #{id,jdbcType=INTEGER}
   </select>
 
+  <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from user_role_assc u inner join role_menu_assc r inner join menu m
+    on u.role_id=r.role_id and r.menu_id = m.id
+    where u.user_id=#{id,jdbcType=INTEGER} group by m.id;
+  </select>
+
   <select id="selectAll" resultMap="BaseResultMap" >
     select
     <include refid="Base_Column_List" />
