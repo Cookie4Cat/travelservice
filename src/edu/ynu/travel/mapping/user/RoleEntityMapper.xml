@@ -6,13 +6,31 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="description" property="description" jdbcType="LONGVARCHAR" />
   </resultMap>
-
+  <resultMap id="RoleMap" type="edu.ynu.travel.message.user.RoleMessage" >
+    <id column="rid" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="LONGVARCHAR" />
+    <collection property="menus" ofType="edu.ynu.travel.entity.user.MenuEntity" javaType="ArrayList">
+      <id column="mid" property="id" jdbcType="INTEGER" />
+      <result column="name" property="name" jdbcType="VARCHAR" />
+      <result column="icon" property="icon" jdbcType="VARCHAR" />
+      <result column="href" property="href" jdbcType="VARCHAR" />
+      <result column="pid" property="pid" jdbcType="INTEGER" />
+    </collection>
+  </resultMap>
   <sql id="Base_Column_List" >
     r.id as rid, name, description
   </sql>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
+    <include refid="Base_Column_List" />
+    from role r
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectRoleById" resultMap="RoleMap" parameterType="java.lang.Integer" >
+    select
     <include refid="Base_Column_List" />
     from role r
     where id = #{id,jdbcType=INTEGER}
@@ -27,7 +45,7 @@
   <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />
-    from role r INNER JOIN user_role_assc u on r.id =u.id
+    from role r INNER JOIN user_role_assc u on r.id =u.role_id
     where u.user_id = #{id,jdbcType=INTEGER}
   </select>
 
@@ -36,6 +54,14 @@
     delete from role
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
+
+  <insert id="insertRoleMenu" >
+    insert into role_menu_assc (role_id, menu_id)
+    values (#{0}, #{1})
+  </insert>
+
+
   <insert id="insert" parameterType="edu.ynu.travel.entity.user.RoleEntity" >
 
     insert into role (id, name, description

@@ -20,6 +20,9 @@ public interface MenuEntityMapper {
     MenuEntity selectByPrimaryKey(Integer id);
 
 
+    List<MenuEntity> selectByRoleId(Integer id);
+
+
     List<MenuEntity> selectAll();
 
 

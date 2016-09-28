@@ -1,6 +1,7 @@
 package edu.ynu.travel.mapper.user;
 
 import edu.ynu.travel.entity.user.RoleEntity;
+import edu.ynu.travel.message.user.RoleMessage;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -10,6 +11,9 @@ import java.util.List;
 public interface RoleEntityMapper {
 
     int deleteByPrimaryKey(Integer id);
+
+
+    int insertRoleMenu(int roleId, int menuId);
 
 
     int insert(RoleEntity record);
@@ -25,6 +29,9 @@ public interface RoleEntityMapper {
 
 
     RoleEntity selectByPrimaryKey(Integer id);
+
+
+    RoleMessage selectRoleById(Integer id);
 
 
     int updateByPrimaryKeySelective(RoleEntity record);
