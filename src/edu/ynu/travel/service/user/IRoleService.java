@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface IRoleService {
     RoleEntity getRoleById(int id);
+    List<RoleEntity> listAllRole();
     int addRole(RoleEntity roleEntity);
     int deleteRoleById(int id);
 }

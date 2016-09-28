@@ -23,10 +23,12 @@ public class UserController {
     @RequestMapping(value = "/users",method = RequestMethod.POST)
     public SimpleResponse addUser(@RequestBody RegistMessage regist){
         String passwordHash = MD5Util.GetMD5Code(regist.getPassword());
+        short status = (short)0;
         UserEntity userInsert = new UserEntity();
         userInsert.setUsername(regist.getUsername());
         userInsert.setEmail(regist.getEmail());
         userInsert.setPasswordHash(passwordHash);
+        userInsert.setStatus(status);
         return userService.addUser(userInsert);
     }
 

@@ -118,4 +118,9 @@ public class ScenicServiceImpl implements IScenicService {
         }
         return scenicMessages;
     }
+
+    @Override
+    public List<ScenicEntity> listAllScenic() {
+        return scenicEntityMapper.selectAll();
+    }
 }

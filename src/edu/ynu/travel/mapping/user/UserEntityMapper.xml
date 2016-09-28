@@ -60,10 +60,10 @@
       This element was generated on Mon Sep 26 23:46:33 CST 2016.
     -->
     insert into user ( username, password_hash,
-      email, status, created_at, 
+      email, status, created_at
       )
     values ( #{username,jdbcType=VARCHAR}, #{passwordHash,jdbcType=VARCHAR},
-      #{email,jdbcType=VARCHAR}, #{status,jdbcType=SMALLINT}, now())
+      #{email,jdbcType=VARCHAR}, #{status,jdbcType=SMALLINT}, #{createAt,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="edu.ynu.travel.entity.user.UserEntity" >
     <!--
@@ -88,7 +88,6 @@
       <if test="status != null" >
         status,
       </if>
-      created_at
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -106,7 +105,6 @@
       <if test="status != null" >
         #{status,jdbcType=SMALLINT},
       </if>
-      now()
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="edu.ynu.travel.entity.user.UserEntity" >

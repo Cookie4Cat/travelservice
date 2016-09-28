@@ -21,6 +21,9 @@ public interface RoleEntityMapper {
     List<RoleEntity> selectByUserId(Integer id);
 
 
+    List<RoleEntity> selectAll();
+
+
     RoleEntity selectByPrimaryKey(Integer id);
 
 

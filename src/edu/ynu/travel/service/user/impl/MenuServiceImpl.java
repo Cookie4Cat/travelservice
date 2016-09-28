@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 @Transactional
@@ -17,6 +18,11 @@ public class MenuServiceImpl implements IMenuService {
     @Override
     public int addMenu(MenuEntity menuEntity) {
         return menuEntityMapper.insert(menuEntity);
+    }
+
+    @Override
+    public List<MenuEntity> listAll() {
+        return menuEntityMapper.selectAll();
     }
 
     @Override

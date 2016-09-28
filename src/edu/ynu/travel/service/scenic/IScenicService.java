@@ -1,6 +1,7 @@
 package edu.ynu.travel.service.scenic;
 
 
+import edu.ynu.travel.entity.scenic.ScenicEntity;
 import edu.ynu.travel.message.common.SimpleResponse;
 import edu.ynu.travel.message.scenic.ScenicList;
 import edu.ynu.travel.message.scenic.ScenicMessage;
@@ -15,4 +16,5 @@ public interface IScenicService {
     SimpleResponse updateScenic(MultipartFile[] files, String path, ScenicMessage scenicMessage);
     int deleteScenic(int id);
     List<ScenicMessage> getScenicList(int page, int size);
+    List<ScenicEntity> listAllScenic();
 }

@@ -32,9 +32,10 @@ public interface ScenicEntityMapper {
     int updateByPrimaryKeySelective(ScenicEntity record);
 
 
-
     int updateByPrimaryKey(ScenicEntity record);
 
 
     List<ScenicMessage> listAllScenic(PageBounds pageBounds);
+
+
 }
