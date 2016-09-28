@@ -35,7 +35,7 @@
 
   <select id="selectAdmin" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />
+    id, username, email, status, created_at
     from user
     where status != 0
   </select>
