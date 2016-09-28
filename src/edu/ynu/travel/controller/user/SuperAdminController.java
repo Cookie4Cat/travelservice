@@ -16,7 +16,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping(value = "/user/superAdmin")
+@RequestMapping(value = "/user/super-admin")
 public class SuperAdminController{
     @Resource
     private IUserService userService;
