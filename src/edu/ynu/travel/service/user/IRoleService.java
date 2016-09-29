@@ -14,7 +14,7 @@ public interface IRoleService {
     RoleMessage getRoleById(int id);
     List<RoleEntity> listAllRole();
     RoleList listAllRole(int page,int size);
-    int addRole(RoleEntity roleEntity);
+    RoleEntity addRole(RoleEntity roleEntity);
     int updateRole(RoleEntity roleEntity);
     SimpleResponse addRoleMenu(RoleMessage roleMessage);
     int deleteRoleById(int id);

@@ -49,8 +49,8 @@ public class RoleServiceImpl implements IRoleService{
     }
 
     @Override
-    public int addRole(RoleEntity roleEntity) {
-        return roleEntityMapper.insert(roleEntity);
+    public RoleEntity addRole(RoleEntity roleEntity) {
+        return roleEntityMapper.insert(roleEntity)==1?roleEntity:null;
     }
 
     @Override

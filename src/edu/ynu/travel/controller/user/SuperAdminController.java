@@ -60,7 +60,7 @@ public class SuperAdminController{
 
 
     @RequestMapping(value = "/roles", method = RequestMethod.POST)
-    public int addRole(@RequestBody RoleEntity roleEntity){
+    public RoleEntity addRole(@RequestBody RoleEntity roleEntity){
         return roleService.addRole(roleEntity);
     }
 

@@ -67,21 +67,19 @@
   </insert>
 
 
-  <insert id="insert" parameterType="edu.ynu.travel.entity.user.RoleEntity" >
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="edu.ynu.travel.entity.user.RoleEntity" >
 
-    insert into role (id, name, description
+    insert into role ( name, description
       )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=LONGVARCHAR}
+    values ( #{name,jdbcType=VARCHAR}, #{description,jdbcType=LONGVARCHAR}
       )
   </insert>
 
-  <insert id="insertSelective" parameterType="edu.ynu.travel.entity.user.RoleEntity" >
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="edu.ynu.travel.entity.user.RoleEntity" >
 
     insert into role
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
+
       <if test="name != null" >
         name,
       </if>
@@ -90,9 +88,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
